@@ -1,0 +1,40 @@
+.container {
+  background-color: #bb99ff;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  align-items: center;
+  margin-top: 5%;
+  margin-left: 38%;
+  border-radius: 20px;
+  color: white;
+  background: linear-gradient(
+    117deg,
+    rgba(169, 12, 200, 1) 0%,
+    rgba(42, 34, 194, 1) 29%,
+    rgba(164, 135, 228, 1) 100%
+  );
+}
+
+.header {
+  font-size: 28px;
+}
+
+.username,
+.password,
+.btn {
+  display: block;
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.btn {
+  padding: 5px 25px;
+  font-size: 18px;
+  border-radius: 15px;
+  margin-left: 146px;
+  margin-bottom: 5px;
+  border: none;
+  background-color: #5500ff;
+  color: white;
+}

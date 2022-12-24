@@ -1,0 +1,12 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    356deg,
+    rgba(110, 127, 222, 1) 0%,
+    rgba(34, 194, 181, 1) 32%,
+    rgba(13, 156, 231, 1) 100%
+  );
+  position: absolute;
+  z-index: -1;
+}
