@@ -4,9 +4,10 @@ import WelcomeScreen from "./components/welcome-screen/WelcomeScreen.js";
 import classes from "./App.module.css";
 import LoginFrom from "./components/login/LoginForm.js";
 import RegisterForm from "./components/register/RegisterForm.js";
-import Home from "./components/UserViews/Home.js";
+import Home from "./components/UserViews/Home/Home.js";
 import Background from "./components/UI/Background.js";
 import StateContext from "./components/state-ctx/state-ctx.js";
+import Profile from "./components/UserViews/Profile/Profile.js";
 
 function App() {
   const ctx = useContext(StateContext);
@@ -20,8 +21,11 @@ function App() {
   if (ctx.registerClicked) {
     content = <RegisterForm />;
   }
-  if (ctx.hasUserLogged) {
+  if (ctx.hasUserLogged && ctx.homeClicked) {
     content = <Home />;
+  }
+  if (ctx.hasUserLogged && ctx.profileClicked) {
+    content = <Profile />;
   }
 
   return (

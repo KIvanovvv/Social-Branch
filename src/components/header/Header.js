@@ -16,24 +16,29 @@ const Header = (props) => {
 
         {!ctx.hasUserLogged && (
           <div className={classes.btns_guest}>
-            {!ctx.loginCLicked && !ctx.hasUserLogged && (
-              <button onClick={ctx.onLogin} className={classes.login}>
-                Login
-              </button>
-            )}
-            {!ctx.registerCLicked && !ctx.hasUserLogged && (
-              <button onClick={ctx.onRegister} className={classes.register}>
-                Register
-              </button>
-            )}
+            <Button onClick={ctx.onLogin} className={classes.login}>
+              Login
+            </Button>
+            <Button onClick={ctx.onRegister} className={classes.register}>
+              Register
+            </Button>
           </div>
         )}
         {ctx.hasUserLogged && (
           <div className={classes.btns_user}>
-            <Button className={classes.btn_home}>Home</Button>
-            <Button className={classes.btn_profile}>Profile</Button>
+            <Button className={classes.btn_home} onClick={ctx.onHomeClicked}>
+              Home
+            </Button>
+            <Button
+              className={classes.btn_profile}
+              onClick={ctx.onProfileClicked}
+            >
+              Profile
+            </Button>
             <Button className={classes.btn_chat}>Chat</Button>
-            <Button onClick={ctx.onLogout} className={classes.btn_logout}>Logout</Button>
+            <Button onClick={ctx.onLogout} className={classes.btn_logout}>
+              Logout
+            </Button>
           </div>
         )}
       </nav>

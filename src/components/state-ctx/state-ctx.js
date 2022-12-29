@@ -10,6 +10,10 @@ const StateContext = React.createContext({
   hasUserLogged: false,
   onHasUserLogged: () => {},
   onLogout: () => {},
+  profileClicked: false,
+  onProfileClicked: () => {},
+  homeClicked: false,
+  onHomeClicked: () => {},
 });
 
 export const StateContextProvider = (props) => {
@@ -17,6 +21,18 @@ export const StateContextProvider = (props) => {
   const [registerClicked, setRegisterClicked] = useState(false);
   const [isWelcome, setIsWelcome] = useState(true);
   const [hasUserLogged, setHasUserLogged] = useState(false);
+  const [profileClicked, setProfileClicked] = useState(false);
+  const [homeClicked, setHomeClicked] = useState(false);
+
+  const homeClickHandler = () => {
+    setHomeClicked(true);
+    setProfileClicked(false);
+  };
+
+  const profileClickedHandler = () => {
+    setProfileClicked(true);
+    setHomeClicked(false);
+  };
 
   const loginClickedHandler = () => {
     setLoginClicked(true);
@@ -35,6 +51,7 @@ export const StateContextProvider = (props) => {
   };
   const hasUserLoggedHandler = () => {
     setHasUserLogged(true);
+    setHomeClicked(true);
     setIsWelcome(false);
     setLoginClicked(false);
     setRegisterClicked(false);
@@ -57,6 +74,10 @@ export const StateContextProvider = (props) => {
         hasUserLogged: hasUserLogged,
         onHasUserLogged: hasUserLoggedHandler,
         onLogout: userLogoutHandler,
+        profileClicked: profileClicked,
+        onProfileClicked: profileClickedHandler,
+        homeClicked: homeClicked,
+        onHomeClicked: homeClickHandler,
       }}
     >
       {props.children}

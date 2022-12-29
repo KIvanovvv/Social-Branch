@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import StateContext from "../state-ctx/state-ctx.js";
+import Button from "../UI/Button.js";
 
 import classes from "./LoginForm.module.css";
 const LoginFrom = (props) => {
@@ -22,13 +23,13 @@ const LoginFrom = (props) => {
               type="password"
               placeholder="Password"
             />
-            <button
+            <Button
               onClick={ctx.onHasUserLogged}
               className={classes.btn}
               type="submit"
             >
               Sign in
-            </button>
+            </Button>
           </form>
         </div>
       </div>

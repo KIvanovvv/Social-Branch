@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../UI/Button.js";
 
 import classes from "./RegisterForm.module.css";
 const RegisterForm = () => {
@@ -30,9 +31,9 @@ const RegisterForm = () => {
               type="password"
               placeholder="Repeat password"
             />
-            <button className={classes.btn} type="submit">
+            <Button className={classes.btn} type="submit">
               Sign up
-            </button>
+            </Button>
           </form>
         </div>
       </div>
