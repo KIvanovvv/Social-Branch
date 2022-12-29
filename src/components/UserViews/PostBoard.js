@@ -1,44 +1,38 @@
 import React from "react";
 import Button from "../UI/Button.js";
 import classes from "./PostBoard.module.css";
+import profilePic from "../../resources/profilePic.jpg";
+import Posts from "./Posts.js";
 const PostBoard = () => {
+  const DUMMY_POSTS = [
+    {
+      id: 1,
+      img: profilePic,
+      text: "This is first post",
+    },
+    {
+      id: 2,
+      img: profilePic,
+      text: "This is second post",
+    },
+    {
+      id: 3,
+      img: profilePic,
+      text: "This is third post",
+    },
+    {
+      id: 4,
+      img: profilePic,
+      text: "All posts are HARDCODED with Dummy Data",
+    },
+  ];
   return (
     <div className={classes.container}>
       <div className={classes.header}>
         <p>Post Board</p>
       </div>
       <div className={classes.content}>
-        <ul className={classes.list}>
-          <li>
-            <div className={classes.img}></div>{" "}
-            <p>
-              Some post
-              hereaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              aaaaaaaaaaaaaa
-            </p>{" "}
-            <div className={classes.btn_container}>
-              <Button>Comments</Button>
-            </div>
-          </li>
-          <li>
-            <div className={classes.img}></div> <p>Some post here</p>{" "}
-            <div className={classes.btn_container}>
-              <Button>Comments</Button>
-            </div>
-          </li>
-          <li>
-            <div className={classes.img}></div> <p>Some post here</p>{" "}
-            <div className={classes.btn_container}>
-              <Button>Comments</Button>
-            </div>
-          </li>
-          <li>
-            <div className={classes.img}></div> <p>Some post here</p>{" "}
-            <div className={classes.btn_container}>
-              <Button>Comments</Button>
-            </div>
-          </li>
-        </ul>
+        <Posts data={DUMMY_POSTS} />
       </div>
     </div>
   );
