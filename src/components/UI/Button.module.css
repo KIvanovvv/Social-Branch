@@ -8,6 +8,7 @@
   background-color: #5500ff;
   color: white;
   display: inline-block;
+  transition: all 0.3s ease 0s;
 }
 
 .btn:hover {
