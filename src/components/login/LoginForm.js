@@ -8,8 +8,8 @@ const LoginFrom = (props) => {
   return (
     <>
       <div className={classes.container}>
-        <div>
-          <h3 className={classes.header}>Enter username and password</h3>
+        <div className={classes.header}>
+          <h3>Enter username and password</h3>
         </div>
         <div>
           <form className={classes.inputs}>

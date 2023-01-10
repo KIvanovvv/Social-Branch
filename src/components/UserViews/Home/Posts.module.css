@@ -17,6 +17,12 @@
 .list {
   display: flex;
   flex-direction: column;
+  /* background-color: red; */
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  gap: 12px;
+  overflow: visible;
 }
 
 .list li {
@@ -25,8 +31,9 @@
   background-color: #99b3ff;
   border-radius: 20px;
   padding: 5px 5px 5px 5px;
-  margin-bottom: 0.2%;
-  margin-right: 4%;
+  overflow: visible;
+  /* margin-bottom: 0.2%;
+  margin-right: 4%; */
 }
 .list p {
   align-self: flex-end;

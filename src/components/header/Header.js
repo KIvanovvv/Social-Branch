@@ -9,21 +9,8 @@ const Header = (props) => {
 
   return (
     <div className={classes.header}>
-      <nav>
-        <div className={classes.name}>
-          <h2 onClick={ctx.onHome}>Social-Branch</h2>
-        </div>
-
-        {!ctx.hasUserLogged && (
-          <div className={classes.btns_guest}>
-            <Button onClick={ctx.onLogin} className={classes.login}>
-              Login
-            </Button>
-            <Button onClick={ctx.onRegister} className={classes.register}>
-              Register
-            </Button>
-          </div>
-        )}
+      <div className={classes.name}>
+        <h2 onClick={ctx.onHome}>Social-Branch</h2>
         {ctx.hasUserLogged && (
           <div className={classes.btns_user}>
             <Button className={classes.btn_home} onClick={ctx.onHomeClicked}>
@@ -36,12 +23,25 @@ const Header = (props) => {
               Profile
             </Button>
             <Button className={classes.btn_chat}>Chat</Button>
-            <Button onClick={ctx.onLogout} className={classes.btn_logout}>
-              Logout
-            </Button>
           </div>
         )}
-      </nav>
+      </div>
+
+      {!ctx.hasUserLogged && (
+        <div className={classes.btns_guest}>
+          <Button onClick={ctx.onLogin} className={classes.login}>
+            Login
+          </Button>
+          <Button onClick={ctx.onRegister} className={classes.register}>
+            Register
+          </Button>
+        </div>
+      )}
+      {ctx.hasUserLogged && (
+        <Button onClick={ctx.onLogout} className={classes.btn_logout}>
+          Logout
+        </Button>
+      )}
     </div>
   );
 };

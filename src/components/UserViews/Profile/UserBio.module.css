@@ -60,3 +60,10 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+@media screen and (max-width: 1540px) {
+  .container {
+    width: 90%;
+    margin-top: 20%;
+  }
+}
