@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-.username,
+.email,
 .password,
 .btn {
   display: block;
@@ -38,4 +38,13 @@
   border: none;
   background-color: #5500ff;
   color: white;
+}
+
+.error_text {
+  color: rgb(246, 52, 52);
+  font-size: 16px;
+}
+
+.invalid {
+  background-color: rgb(247, 145, 145);
 }

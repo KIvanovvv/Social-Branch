@@ -25,6 +25,7 @@ const PostBoard = () => {
       text: "All posts are HARDCODED with Dummy Data",
     },
   ];
+  
   return (
     <div className={classes.container}>
       <div className={classes.header}>

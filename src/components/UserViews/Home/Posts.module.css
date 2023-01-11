@@ -12,7 +12,9 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .list {
   display: flex;
@@ -52,4 +54,18 @@
 }
 .btn_container button {
   width: 100%;
+}
+
+.loading {
+  background-color: #99b3ff;
+  text-align: center;
+  font-size: 26px;
+  border-radius: 20px;
+  color: white;
+}
+
+.postName {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
 }
