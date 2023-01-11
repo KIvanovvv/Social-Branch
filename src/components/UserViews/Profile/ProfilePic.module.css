@@ -2,6 +2,7 @@
   width: 90%;
   height: 90%;
   background-size: cover;
+  background-position: center;
   display: inline-block;
   border-radius: 50%;
 }
