@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
-const Posts = (props) => {
+const Posts = () => {
+  const ctx = useContext(StateContext);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -18,22 +20,24 @@ const Posts = (props) => {
       setPosts(postsData);
     };
     fetchPosts();
-  }, []);
+    ctx.setPostUpdated(false);
+  }, [ctx.postUpdated]);
   if (!hasLoaded && isLoading) {
-    console.log(`Loading....`);
+    // console.log(`Loading....`);
     return (
       <ul className={classes.list}>
         <div className={classes.loading}>Loading ...</div>
       </ul>
     );
   }
+
   if (hasLoaded) {
-    console.log(posts);
+    // console.log(posts);
     return (
       <ul className={classes.list}>
-        {posts.map((data) => {
+        {posts.reverse().map((data) => {
           return (
-            <li key={data.ownerId}>
+            <li key={Math.random()}>
               <div
                 className={classes.img}
                 style={{

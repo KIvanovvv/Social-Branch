@@ -45,18 +45,31 @@ const LoginFrom = (props) => {
   const onPassBlurHandler = () => {
     setIsPasswordTouched(true);
   };
-  const onSignInHandler = (e) => {
+  const fetchUserData = async () => {
+    const response = await fetch(
+      `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`
+    );
+    const data = await response.json();
+    const users = Object.values(data);
+    //console.log(data);
+    return users;
+  };
+  const onSignInHandler = async (e) => {
     e.preventDefault();
     if (!isFormValid) {
       return;
     }
-    const fetchUserData = async () => {
-      const response = await fetch(
-        `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`
-      );
-      const data = await response.json();
-      console.log(data);
-    };
+    const users = await fetchUserData();
+    const currentUser = users.find(
+      (x) => x.email === email && x.password === password
+    );
+    if (currentUser) {
+      ctx.setCurrentUser(currentUser)
+    } else {
+      console.log(`The user does not exist`);
+      return;
+    }
+    // console.log(users);
     ctx.onHasUserLogged();
   };
 
