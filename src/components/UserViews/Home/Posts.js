@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { getAllPosts } from "../../../services/postServices.js";
 import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
@@ -10,12 +11,7 @@ const Posts = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      //TODO export getAll service
-      const response = await fetch(
-        `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/posts.json`
-      );
-      const data = await response.json();
-      const postsData = Object.values(data);
+      const postsData = await getAllPosts();
       setIsLoading(false);
       setHasLoaded(true);
       setPosts(postsData);
@@ -46,7 +42,9 @@ const Posts = () => {
                 }}
               ></div>{" "}
               <p>
-                <span className={classes.postName}>{data.ownerName} : </span>
+                <span className={classes.postName}>
+                  {data.ownerUsername} :{" "}
+                </span>
                 {data.content}
               </p>{" "}
               <div className={classes.btn_container}>
