@@ -8,8 +8,10 @@ import Home from "./components/UserViews/Home/Home.js";
 import Background from "./components/UI/Background.js";
 import StateContext from "./components/state-ctx/state-ctx.js";
 import Profile from "./components/UserViews/Profile/Profile.js";
+// import db from "./services/firebase.js";
 
 function App() {
+  // console.log("Ap: ", db);
   const ctx = useContext(StateContext);
   let content = null;
   if (ctx.isWelcome) {

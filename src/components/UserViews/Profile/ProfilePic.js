@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import profilePic from "../../../resources/profilePic.jpg";
-import StateContext from "../../state-ctx/state-ctx.js";
+
 import classes from "./ProfilePic.module.css";
 
-const ProfilePic = () => {
-  const ctx = useContext(StateContext);
+const ProfilePic = (props) => {
   return (
     <div className={classes.wrapper}>
       <div
         className={classes.profile_img}
-        style={{ backgroundImage: `url(${ctx.currentUser.profileUrl})` }}
+        style={{ backgroundImage: `url(${props.userData.imageUrl})` }}
       ></div>
     </div>
   );

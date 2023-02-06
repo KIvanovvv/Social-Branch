@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../UI/Button.js";
+import { register } from "../../services/authServices.js";
 
 import classes from "./RegisterForm.module.css";
+import StateContext from "../state-ctx/state-ctx.js";
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(false);
@@ -12,6 +14,7 @@ const RegisterForm = () => {
   const [repass, setRepass] = useState("");
   const [repassIsValid, setRepassIsValid] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const ctx = useContext(StateContext);
 
   let isFormValid = false;
   useEffect(() => {
@@ -53,23 +56,24 @@ const RegisterForm = () => {
       console.log(`Inputs are invalid`);
       return;
     }
-    const response = await fetch(
-      `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          profileUrl: imageUrl,
-          username: username,
-        }),
-      }
-    );
-    const data = await response.json();
-    console.log(`Inputs are okey`);
+    // const response = await fetch(
+    //   `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       email: email,
+    //       password: password,
+    //       profileUrl: imageUrl,
+    //       username: username,
+    //     }),
+    //   }
+    // );
+    const token = await register(email, username, password, imageUrl);
+    sessionStorage.setItem("user", JSON.stringify(token));
+    ctx.onHasUserLogged();
   };
   return (
     <>

@@ -63,6 +63,7 @@ export const StateContextProvider = (props) => {
     setRegisterClicked(false);
   };
   const userLogoutHandler = () => {
+    sessionStorage.clear();
     setHasUserLogged(false);
     setIsWelcome(true);
     setLoginClicked(false);

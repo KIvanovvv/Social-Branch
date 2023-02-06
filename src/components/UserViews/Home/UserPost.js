@@ -9,6 +9,7 @@ const UserPost = () => {
     if (post.trim().length === 0) {
       return;
     }
+    //TODO migrate create post to services and include header X-Authorization
     const response = await fetch(
       `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/posts.json`,
       {

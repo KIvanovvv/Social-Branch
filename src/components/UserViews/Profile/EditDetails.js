@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import classes from "./EditDetails.module.css";
 // import profilePic from "../../../resources/profilePic.jpg";
 import Button from "../../UI/Button.js";
-import StateContext from "../../state-ctx/state-ctx.js";
-const EditDetails = () => {
-  const ctx = useContext(StateContext);
 
+const EditDetails = (props) => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -17,7 +15,7 @@ const EditDetails = () => {
             <div className={classes.list_cell}>
               <div className={classes.list_top}>Username</div>
               <div className={classes.list_bottom}>
-                <input type="text" value={ctx.currentUser.username} />
+                <input type="text" value={props.userData.username} />
               </div>
             </div>
           </li>
@@ -34,7 +32,7 @@ const EditDetails = () => {
               <div className={classes.list_left_pic}>
                 <div
                   style={{
-                    backgroundImage: `url(${ctx.currentUser.profileUrl})`,
+                    backgroundImage: `url(${props.userData.imageUrl})`,
                   }}
                   className={classes.img}
                 ></div>

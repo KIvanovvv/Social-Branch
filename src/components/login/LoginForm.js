@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { login } from "../../services/authServices.js";
 import StateContext from "../state-ctx/state-ctx.js";
 import Button from "../UI/Button.js";
 
@@ -10,6 +11,7 @@ const LoginFrom = (props) => {
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isPasswordTouched, setIsPasswordTouched] = useState(false);
+  const [inputsAreInvalid, setInputsAreInvalid] = useState(false);
   const ctx = useContext(StateContext);
 
   const emailPattern = /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -17,11 +19,13 @@ const LoginFrom = (props) => {
   const onEmailChangeHandler = (e) => {
     setEmail(e.target.value);
     setIsEmailTouched(false);
+    setInputsAreInvalid(false);
   };
 
   const onPassChangeHadler = (e) => {
     setPassword(e.target.value);
     setIsPasswordTouched(false);
+    setInputsAreInvalid(false);
   };
   useEffect(() => {
     if (email.match(emailPattern)) {
@@ -45,32 +49,39 @@ const LoginFrom = (props) => {
   const onPassBlurHandler = () => {
     setIsPasswordTouched(true);
   };
-  const fetchUserData = async () => {
-    const response = await fetch(
-      `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`
-    );
-    const data = await response.json();
-    const users = Object.values(data);
-    //console.log(data);
-    return users;
-  };
+  // const fetchUserData = async () => {
+  //   const response = await fetch(
+  //     `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`
+  //   );
+  //   const data = await response.json();
+  //   const users = Object.values(data);
+  //   //console.log(data);
+  //   return users;
+  // };
   const onSignInHandler = async (e) => {
     e.preventDefault();
     if (!isFormValid) {
       return;
     }
-    const users = await fetchUserData();
-    const currentUser = users.find(
-      (x) => x.email === email && x.password === password
-    );
-    if (currentUser) {
-      ctx.setCurrentUser(currentUser)
-    } else {
-      console.log(`The user does not exist`);
-      return;
-    }
+    // const users = await fetchUserData();
+    // const currentUser = users.find(
+    //   (x) => x.email === email && x.password === password
+    // );
+    // if (currentUser) {
+    //   ctx.setCurrentUser(currentUser)
+    // } else {
+    //   console.log(`The user does not exist`);
+    //   return;
+    // }
     // console.log(users);
-    ctx.onHasUserLogged();
+    try {
+      const token = await login(email, password);
+      sessionStorage.setItem("user", JSON.stringify(token));
+      console.log(token);
+      ctx.onHasUserLogged();
+    } catch (error) {
+      setInputsAreInvalid(true);
+    }
   };
 
   const inputClasses = {
@@ -88,6 +99,9 @@ const LoginFrom = (props) => {
           <h3>Enter email and password</h3>
         </div>
         <div>
+          {inputsAreInvalid && (
+            <p className={classes.error_text}>Incorrect email or password</p>
+          )}
           <form onSubmit={onSignInHandler} className={classes.inputs}>
             <input
               className={inputClasses.email}

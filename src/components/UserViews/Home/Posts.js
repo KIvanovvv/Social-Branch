@@ -10,6 +10,7 @@ const Posts = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      //TODO export getAll service
       const response = await fetch(
         `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/posts.json`
       );
