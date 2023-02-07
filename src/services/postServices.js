@@ -20,5 +20,5 @@ export async function createPost(content) {
 export async function getAllPosts() {
   const response = await fetch(`http://localhost:3030/posts/`);
   const data = await response.json();
-  return data;
+  return data.reverse();
 }

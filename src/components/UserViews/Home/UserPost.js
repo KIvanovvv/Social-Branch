@@ -10,22 +10,7 @@ const UserPost = () => {
     if (post.trim().length === 0) {
       return;
     }
-    //TODO migrate create post to services and include header X-Authorization
-    // const response = await fetch(
-    //   `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/posts.json`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Contet-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       content: post,
-    //       imageUrl: ctx.currentUser.profileUrl,
-    //       ownerName: ctx.currentUser.username,
-    //     }),
-    //   }
-    // );
-    // const data = await response.json();
+
     const data = await createPost(post);
     setPost("");
     ctx.setPostUpdated(true);

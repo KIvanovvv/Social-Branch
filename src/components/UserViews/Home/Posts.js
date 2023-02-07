@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { getAllPosts } from "../../../services/postServices.js";
 import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../../UI/Button.js";
+import List from "./List.js";
 import classes from "./Posts.module.css";
 const Posts = () => {
   const ctx = useContext(StateContext);
@@ -32,26 +33,8 @@ const Posts = () => {
     // console.log(posts);
     return (
       <ul className={classes.list}>
-        {posts.reverse().map((data) => {
-          return (
-            <li key={Math.random()}>
-              <div
-                className={classes.img}
-                style={{
-                  backgroundImage: `url(${data.imageUrl})`,
-                }}
-              ></div>{" "}
-              <p>
-                <span className={classes.postName}>
-                  {data.ownerUsername} :{" "}
-                </span>
-                {data.content}
-              </p>{" "}
-              <div className={classes.btn_container}>
-                <Button className={classes.btn}>Comments</Button>
-              </div>
-            </li>
-          );
+        {posts.map((data) => {
+          return <List data={data} />;
         })}
       </ul>
     );
