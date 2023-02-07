@@ -6,7 +6,11 @@ const Button = (props) => {
     props.className ? props.className : ""
   }`;
   return (
-    <button onClick={props.onClick} className={customClass}>
+    <button
+      onClick={props.onClick}
+      className={customClass}
+      disabled={props.disabled}
+    >
       {props.children}
     </button>
   );

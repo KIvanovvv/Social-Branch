@@ -36,3 +36,78 @@ export async function login(email, password) {
     throw new Error();
   }
 }
+
+export async function changeUsernameById(id, username) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  try {
+    const response = await fetch(`http://localhost:3030/users/change`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization": user.accessToken,
+      },
+      body: JSON.stringify({
+        _id: id,
+        username: username,
+      }),
+    });
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+export async function changePasswordById(id, password) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  try {
+    const response = await fetch(
+      `http://localhost:3030/users/change/password`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Authorization": user.accessToken,
+        },
+        body: JSON.stringify({
+          _id: id,
+          password: password,
+        }),
+      }
+    );
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+export async function changeImageById(id, imageUrl) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  try {
+    const response = await fetch(`http://localhost:3030/users/change/image`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization": user.accessToken,
+      },
+      body: JSON.stringify({
+        _id: id,
+        imageUrl: imageUrl,
+      }),
+    });
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}
