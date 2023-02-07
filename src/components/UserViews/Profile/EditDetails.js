@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classes from "./EditDetails.module.css";
-// import profilePic from "../../../resources/profilePic.jpg";
 import Button from "../../UI/Button.js";
 import {
   changeImageById,

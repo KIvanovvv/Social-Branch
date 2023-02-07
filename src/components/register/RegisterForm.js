@@ -56,21 +56,7 @@ const RegisterForm = () => {
       console.log(`Inputs are invalid`);
       return;
     }
-    // const response = await fetch(
-    //   `http://social-branch-default-rtdb.europe-west1.firebasedatabase.app/users.json`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: email,
-    //       password: password,
-    //       profileUrl: imageUrl,
-    //       username: username,
-    //     }),
-    //   }
-    // );
+  
     const token = await register(email, username, password, imageUrl);
     sessionStorage.setItem("user", JSON.stringify(token));
     ctx.onHasUserLogged();

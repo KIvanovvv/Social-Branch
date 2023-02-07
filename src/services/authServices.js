@@ -111,3 +111,30 @@ export async function changeImageById(id, imageUrl) {
     throw new Error();
   }
 }
+
+export async function changeDescriptionById(id, description) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  try {
+    const response = await fetch(
+      `http://localhost:3030/users/change/description`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Authorization": user.accessToken,
+        },
+        body: JSON.stringify({
+          _id: id,
+          description: description,
+        }),
+      }
+    );
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}

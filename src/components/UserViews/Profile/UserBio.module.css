@@ -67,3 +67,10 @@
     margin-top: 20%;
   }
 }
+
+.saved {
+  background-color: green;
+}
+.saved:hover {
+  background-color: green;
+}
