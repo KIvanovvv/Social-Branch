@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createComment, getComments } from "../../../services/postServices.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 
@@ -6,14 +7,40 @@ export default function List(props) {
   //TODO  create function createComment, create model in server for comments
   const [commentsVisiable, setCommentsVisiable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(props.data._id);
-  function viewComments() {
+  const [content, setContent] = useState("");
+  const [comments, setComments] = useState([]);
+  const [commentsUpdated, setCommentsUpdated] = useState(false);
+
+  function onChangeHandler(e) {
+    setContent(e.target.value);
+  }
+
+  async function addComment() {
+    if (!content) {
+      return;
+    }
+    await createComment(content, props.data._id);
+    setCommentsUpdated(true);
+    setContent("");
+  }
+
+  useEffect(() => {
+    async function loadComments() {
+      setIsLoading(true);
+      setComments(await getComments(props.data._id));
+      setIsLoading(false);
+    }
+    console.log(comments);
+    loadComments();
+    setCommentsUpdated(false);
+  }, [commentsUpdated]);
+
+  async function viewComments() {
     setCommentsVisiable((curr) => !curr);
     if (commentsVisiable) {
-      setIsLoading(true);
     }
-    setIsLoading(false);
-    console.log(commentsVisiable);
+
+    console.log(comments);
   }
   return (
     <>
@@ -24,12 +51,16 @@ export default function List(props) {
             backgroundImage: `url(${props.data.imageUrl})`,
           }}
         ></div>{" "}
-        <p>
+        <div className={classes.content_post}>
           <span className={classes.postName}>
             {props.data.ownerUsername} :{" "}
           </span>
-          {props.data.content}
-        </p>{" "}
+          <textarea
+            readOnly={true}
+            defaultValue={props.data.content}
+            rows={5}
+          ></textarea>{" "}
+        </div>
         <div className={classes.btn_container}>
           <Button onClick={viewComments} className={classes.btn}>
             Comments
@@ -43,12 +74,31 @@ export default function List(props) {
             <>
               {" "}
               <div className={classes.actions}>
-                <input type="text" placeholder="Your comment..." />
-                <Button onClick={createComment}>Publish</Button>
+                <input
+                  type="text"
+                  placeholder="Your comment..."
+                  onChange={onChangeHandler}
+                  value={content}
+                />
+                <Button onClick={addComment}>Publish</Button>
               </div>
               <ul>
-                <li>Some comments</li>
-                <li>Some comments</li>
+                {comments.map((x) => (
+                  <li>
+                    <div
+                      className={classes.img_comment}
+                      style={{
+                        backgroundImage: `url(${x.imageUrl})`,
+                      }}
+                    ></div>
+                    <p className={classes.comment_p}>
+                      <span className={classes.comment_author}>
+                        {x.username}:
+                      </span>{" "}
+                      {x.content}
+                    </p>
+                  </li>
+                ))}
               </ul>
             </>
           )}

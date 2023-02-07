@@ -15,6 +15,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  align-self: center;
 }
 .list {
   display: flex;
@@ -72,11 +73,13 @@
 
 .comment_section {
   overflow: visible;
-  padding-left: 40px;
-  padding-right: 40px;
+  /* padding-left: 40px;
+  padding-right: 40px; */
   /* height: 100px; */
   /* display: flex;
   flex-direction: column; */
+  border: 2px solid #99b3ff;
+  padding: 10px 40px;
 }
 .comment_section ul {
   padding: 0;
@@ -98,4 +101,48 @@
 }
 .actions input {
   font-size: 18px;
+  padding-left: 6px;
+}
+
+.comment_author {
+  color: white;
+  font-weight: bold;
+  /* font-size: 18px; */
+}
+.comment_p {
+  padding: 0;
+  font-size: 14px;
+}
+
+.img_comment {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.content_post {
+  display: flex;
+  flex-direction: column;
+}
+
+.content_post textarea {
+  resize: none;
+  border: none;
+  background-color: #99b3ff;
+  overflow: hidden auto;
+  width: 770px;
+  height: 100px;
+}
+@media screen and (max-width: 1540px) {
+  .content_post textarea {
+    width: 580px;
+    height: 90px;
+  }
+  .img_comment {
+    width: 60px;
+    height: 60px;
+  }
 }
