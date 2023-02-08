@@ -5,6 +5,7 @@ import Button from "../UI/Button.js";
 import classes from "./Header.module.css";
 
 const Header = (props) => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
   const ctx = useContext(StateContext);
 
   return (
@@ -22,7 +23,10 @@ const Header = (props) => {
             >
               Profile
             </Button>
-            <Button className={classes.btn_chat}>Chat</Button>
+            <Button className={classes.btn_chat} onClick={ctx.onMyPostsClicked}>
+              My Posts
+            </Button>
+            <Button className={classes.btn_chat}>Search</Button>
           </div>
         )}
       </div>
@@ -38,9 +42,15 @@ const Header = (props) => {
         </div>
       )}
       {ctx.hasUserLogged && (
-        <Button onClick={ctx.onLogout} className={classes.btn_logout}>
-          Logout
-        </Button>
+        <>
+          {" "}
+          <div className={classes.welcome_user}>
+            <p>Welcome {user.username}</p>
+          </div>
+          <Button onClick={ctx.onLogout} className={classes.btn_logout}>
+            Logout
+          </Button>
+        </>
       )}
     </div>
   );

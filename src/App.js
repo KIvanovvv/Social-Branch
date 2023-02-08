@@ -8,6 +8,7 @@ import Home from "./components/UserViews/Home/Home.js";
 import Background from "./components/UI/Background.js";
 import StateContext from "./components/state-ctx/state-ctx.js";
 import Profile from "./components/UserViews/Profile/Profile.js";
+import MyPosts from "./components/UserViews/MyPosts/MyPosts.js";
 // import db from "./services/firebase.js";
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
   }
   if (ctx.hasUserLogged && ctx.profileClicked) {
     content = <Profile />;
+  }
+  if (ctx.hasUserLogged && ctx.myPostsClicked) {
+    content = <MyPosts />;
   }
 
   return (

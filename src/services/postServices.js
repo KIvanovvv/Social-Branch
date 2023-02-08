@@ -49,3 +49,9 @@ export async function getComments(postId) {
   console.log(data);
   return data.reverse();
 }
+
+export async function getUserPosts(id) {
+  const response = await fetch(`http://localhost:3030/posts/user/${id}`);
+  const data = await response.json();
+  return data.reverse();
+}

@@ -18,6 +18,8 @@ const StateContext = React.createContext({
   setCurrentUser: () => {},
   postUpdated: false,
   setPostUpdated: () => {},
+  myPostsClicked: false,
+  onMyPostsClicked: () => {},
 });
 
 export const StateContextProvider = (props) => {
@@ -29,15 +31,24 @@ export const StateContextProvider = (props) => {
   const [homeClicked, setHomeClicked] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [postUpdated, setPostUpdated] = useState(false);
+  const [myPostsClicked, setMyPostsClicked] = useState(false);
 
   const homeClickHandler = () => {
     setHomeClicked(true);
     setProfileClicked(false);
+    setMyPostsClicked(false);
   };
 
   const profileClickedHandler = () => {
     setProfileClicked(true);
     setHomeClicked(false);
+    setMyPostsClicked(false);
+  };
+
+  const myPostsClickedHandler = () => {
+    setMyPostsClicked(true);
+    setHomeClicked(false);
+    setProfileClicked(false);
   };
 
   const loginClickedHandler = () => {
@@ -89,6 +100,8 @@ export const StateContextProvider = (props) => {
         setCurrentUser: setCurrentUser,
         postUpdated: postUpdated,
         setPostUpdated: setPostUpdated,
+        myPostsClicked: myPostsClicked,
+        onMyPostsClicked: myPostsClickedHandler,
       }}
     >
       {props.children}

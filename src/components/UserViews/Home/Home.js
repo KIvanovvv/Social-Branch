@@ -5,7 +5,6 @@ import HomeProfile from "./HomeProfile.js";
 import PostBoard from "./PostBoard.js";
 import UserPost from "./UserPost.js";
 const Home = () => {
-  
   return (
     <div className={classes.wrapper}>
       <div className={classes.left_column}>
