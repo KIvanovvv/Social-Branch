@@ -1,28 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getAllPosts } from "../../../services/postServices.js";
+import {
+  getAllPosts,
+  getPostsByQuery,
+} from "../../../services/postServices.js";
 import StateContext from "../../state-ctx/state-ctx.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
-const Posts = () => {
+const Posts = (props) => {
   const ctx = useContext(StateContext);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [query,setQuery] = useState("")
-  
-  
 
   useEffect(() => {
     const fetchPosts = async () => {
-      
-      const postsData = await getAllPosts();
+      const postsData = await getPostsByQuery(props.query);
       setIsLoading(false);
       setHasLoaded(true);
       setPosts(postsData);
     };
-    fetchPosts();
-    ctx.setPostUpdated(false);
-  }, [ctx.postUpdated]);
+    //TODO add setTimeoutt
+    const timer = setTimeout(() => {
+      fetchPosts();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [props.query]);
   if (!hasLoaded && isLoading) {
     return (
       <ul className={classes.list}>

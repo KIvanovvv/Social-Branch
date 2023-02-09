@@ -88,3 +88,19 @@ export async function deletePostById(id) {
   const data = await response.json();
   return data;
 }
+
+export async function getPostsByQuery(query) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const response = await fetch(`http://localhost:3030/posts/search`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authorization": user.accessToken,
+    },
+    body: JSON.stringify({
+      query: query,
+    }),
+  });
+  const data = await response.json();
+  return data.reverse();
+}

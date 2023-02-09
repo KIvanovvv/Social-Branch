@@ -9,7 +9,7 @@ export const SearchBoard = () => {
   function onChangeHandler(e) {
     setSearchQuery(e.target.value);
   }
-  console.log(searchQuery);
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -25,10 +25,9 @@ export const SearchBoard = () => {
             onChange={onChangeHandler}
             value={searchQuery}
           />
-          <Button>Search</Button>
         </div>
       </div>
-      <div className={classes.content}>{<Posts />}</div>
+      <div className={classes.content}>{<Posts query={searchQuery} />}</div>
     </div>
   );
 };
