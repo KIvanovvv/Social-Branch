@@ -25,10 +25,8 @@
 }
 
 .name {
-  /* background-color: green; */
-  /* display: inline-block; */
   display: flex;
-  gap: 80px;
+  gap: 40px;
 }
 
 .login {
@@ -63,24 +61,15 @@
   align-self: center;
 }
 
-.btn_users,
-.btn_profile,
-.btn_chat {
-  /* margin-left: 15px; */
-}
-
-.btn_logout {
-  /* margin-left: 1100px; */
-}
 .welcome_user {
   background-color: #99b3ff;
   width: fit-content;
   padding: 6px 20px;
-  /* padding: 0 20px;
-  margin-left: 20%;
-  margin-top: 5%; */
   font-weight: bold;
   border-radius: 20px;
+}
+.welcome_user:hover {
+  cursor: default;
 }
 
 .welcome_user p {

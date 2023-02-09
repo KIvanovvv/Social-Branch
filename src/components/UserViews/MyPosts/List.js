@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { createComment, getComments } from "../../../services/postServices.js";
+import {
+  createComment,
+  getComments,
+  updatePostById,
+} from "../../../services/postServices.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 
@@ -10,9 +14,46 @@ export default function List(props) {
   const [content, setContent] = useState("");
   const [comments, setComments] = useState([]);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
+  const [isEditActive, setIsEditActive] = useState(false);
+  const [postContent, setPostContent] = useState(props.data.content);
+  const [isPostUpdated, setIsPostUpdated] = useState(false);
+
+  async function onChangePost(e) {
+    // setPostContent(e.target.value);
+  }
+
+  function onEditHandler() {
+    setIsEditActive(true);
+  }
+
+  function onSaveHandler(e) {
+    setPostContent((curr) => {
+      curr =
+        e.target.parentElement.parentElement.querySelector("textarea").value;
+      return curr;
+    });
+    setIsEditActive(false);
+    setIsPostUpdated(true);
+  }
+
+  useEffect(() => {
+    async function updatePost() {
+      console.log(postContent);
+      console.log(props.data._id);
+      await updatePostById(props.data._id, postContent);
+      setIsPostUpdated(false);
+    }
+    if (isPostUpdated) {
+      updatePost();
+    }
+  }, [isPostUpdated]);
+
+  function updateData() {
+    console.log(postContent);
+  }
 
   function onChangeHandler(e) {
-    setContent(e.target.value);
+    setContent((cur) => e.target.value);
   }
 
   async function addComment() {
@@ -30,7 +71,7 @@ export default function List(props) {
       setComments(await getComments(props.data._id));
       setIsLoading(false);
     }
-    console.log(comments);
+
     loadComments();
     setCommentsUpdated(false);
   }, [commentsUpdated]);
@@ -39,8 +80,6 @@ export default function List(props) {
     setCommentsVisiable((curr) => !curr);
     if (commentsVisiable) {
     }
-
-    console.log(comments);
   }
   return (
     <>
@@ -54,17 +93,29 @@ export default function List(props) {
         <div className={classes.content_post}>
           <span className={classes.postName}>{props.data.ownerUsername} </span>
           <textarea
-            readOnly={true}
-            defaultValue={props.data.content}
+            readOnly={isEditActive ? false : true}
             rows={5}
+            defaultValue={postContent}
           ></textarea>{" "}
         </div>
-        <div className={classes.btn_container}>
-          <Button onClick={viewComments} className={classes.btn}>
-            Comments
-          </Button>
-          <Button className={classes.edit_btn}>Edit</Button>
-          <Button className={classes.delete_btn}>Delete</Button>
+        <div className={classes.btn_area}>
+          {isEditActive && (
+            <>
+              <p>Edit your post</p>
+              <Button className={classes.save_btn} onClick={onSaveHandler}>
+                Save
+              </Button>
+            </>
+          )}
+          <div className={classes.btn_container}>
+            <Button onClick={viewComments} className={classes.btn}>
+              Comments
+            </Button>
+            <Button className={classes.edit_btn} onClick={onEditHandler}>
+              Edit
+            </Button>
+            <Button className={classes.delete_btn}>Delete</Button>
+          </div>
         </div>
       </li>
       {commentsVisiable && (

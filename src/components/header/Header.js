@@ -14,6 +14,9 @@ const Header = (props) => {
         <h2 onClick={ctx.onHome}>Social-Branch</h2>
         {ctx.hasUserLogged && (
           <div className={classes.btns_user}>
+            <div className={classes.welcome_user}>
+              <p>Welcome back, {user.username}</p>
+            </div>
             <Button className={classes.btn_home} onClick={ctx.onHomeClicked}>
               Home
             </Button>
@@ -44,9 +47,6 @@ const Header = (props) => {
       {ctx.hasUserLogged && (
         <>
           {" "}
-          <div className={classes.welcome_user}>
-            <p>Welcome {user.username}</p>
-          </div>
           <Button onClick={ctx.onLogout} className={classes.btn_logout}>
             Logout
           </Button>

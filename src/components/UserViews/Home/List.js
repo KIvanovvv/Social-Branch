@@ -30,7 +30,6 @@ export default function List(props) {
       setComments(await getComments(props.data._id));
       setIsLoading(false);
     }
-    console.log(comments);
     loadComments();
     setCommentsUpdated(false);
   }, [commentsUpdated]);
@@ -39,8 +38,6 @@ export default function List(props) {
     setCommentsVisiable((curr) => !curr);
     if (commentsVisiable) {
     }
-
-    console.log(comments);
   }
   return (
     <>

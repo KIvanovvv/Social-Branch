@@ -135,6 +135,7 @@
   overflow: hidden auto;
   width: 770px;
   height: 100px;
+  outline: none;
 }
 @media screen and (max-width: 1540px) {
   .content_post textarea {

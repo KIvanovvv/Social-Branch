@@ -14,7 +14,7 @@ export async function createPost(content) {
     }),
   });
   const data = await response.json();
-  console.log(data);
+  return data;
 }
 
 export async function getAllPosts() {
@@ -38,15 +38,15 @@ export async function createComment(content, postId) {
       imageUrl: user.imageUrl,
     }),
   });
-  // const data = await response.json();
-  // console.log(data);
+  const data = await response.json();
+  return data;
 }
 export async function getComments(postId) {
   const response = await fetch(
     `http://localhost:3030/posts/comments/${postId}`
   );
   const data = await response.json();
-  console.log(data);
+
   return data.reverse();
 }
 
@@ -54,4 +54,21 @@ export async function getUserPosts(id) {
   const response = await fetch(`http://localhost:3030/posts/user/${id}`);
   const data = await response.json();
   return data.reverse();
+}
+
+export async function updatePostById(id, content) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const response = await fetch(`http://localhost:3030/posts/update`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authorization": user.accessToken,
+    },
+    body: JSON.stringify({
+      content: content,
+      _id: id,
+    }),
+  });
+  const data = await response.json();
+  return data;
 }
