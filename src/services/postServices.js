@@ -72,3 +72,19 @@ export async function updatePostById(id, content) {
   const data = await response.json();
   return data;
 }
+
+export async function deletePostById(id) {
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const response = await fetch(`http://localhost:3030/posts/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authorization": user.accessToken,
+    },
+    body: JSON.stringify({
+      _id: id,
+    }),
+  });
+  const data = await response.json();
+  return data;
+}

@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createComment,
+  deletePostById,
   getComments,
   updatePostById,
 } from "../../../services/postServices.js";
+import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 
 export default function List(props) {
-  //TODO  create function createComment, create model in server for comments
+  const ctx = useContext(StateContext);
   const [commentsVisiable, setCommentsVisiable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [content, setContent] = useState("");
@@ -17,9 +19,23 @@ export default function List(props) {
   const [isEditActive, setIsEditActive] = useState(false);
   const [postContent, setPostContent] = useState(props.data.content);
   const [isPostUpdated, setIsPostUpdated] = useState(false);
+  const [isDeleteActive, setIsDeleteActive] = useState(false);
+  const [postDeleted, setPostDeleted] = useState(false);
 
-  async function onChangePost(e) {
-    // setPostContent(e.target.value);
+  // console.log(postContent);
+  async function onConfirmDeleteHandler() {
+    await deletePostById(props.data._id);
+    setIsDeleteActive(false);
+    setPostDeleted(true);
+    ctx.setPostUpdated(true);
+  }
+
+  function onRejectDeleteHandler() {
+    setIsDeleteActive(false);
+  }
+
+  function onDeleteHandler() {
+    setIsDeleteActive(true);
   }
 
   function onEditHandler() {
@@ -83,7 +99,7 @@ export default function List(props) {
   }
   return (
     <>
-      <li key={Math.random()}>
+      <li>
         <div
           className={classes.img}
           style={{
@@ -107,14 +123,48 @@ export default function List(props) {
               </Button>
             </>
           )}
+          {isDeleteActive && (
+            <div className={classes.delete_container}>
+              <p>Are you sure ?</p>
+
+              <div className={classes.delete_container_btns}>
+                <Button
+                  className={classes.delete_yes_btn}
+                  onClick={onConfirmDeleteHandler}
+                >
+                  Yes
+                </Button>
+                <Button
+                  className={classes.delete_no_btn}
+                  onClick={onRejectDeleteHandler}
+                >
+                  No
+                </Button>
+              </div>
+            </div>
+          )}
           <div className={classes.btn_container}>
-            <Button onClick={viewComments} className={classes.btn}>
+            <Button
+              onClick={viewComments}
+              className={classes.btn}
+              disabled={isEditActive || isDeleteActive ? true : false}
+            >
               Comments
             </Button>
-            <Button className={classes.edit_btn} onClick={onEditHandler}>
+            <Button
+              className={classes.edit_btn}
+              onClick={onEditHandler}
+              disabled={isEditActive || isDeleteActive ? true : false}
+            >
               Edit
             </Button>
-            <Button className={classes.delete_btn}>Delete</Button>
+            <Button
+              className={classes.delete_btn}
+              onClick={onDeleteHandler}
+              disabled={isEditActive || isDeleteActive ? true : false}
+            >
+              Delete
+            </Button>
           </div>
         </div>
       </li>

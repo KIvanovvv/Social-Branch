@@ -15,7 +15,7 @@ const Header = (props) => {
         {ctx.hasUserLogged && (
           <div className={classes.btns_user}>
             <div className={classes.welcome_user}>
-              <p>Welcome back, {user.username}</p>
+              <p>Welcome {user.username}</p>
             </div>
             <Button className={classes.btn_home} onClick={ctx.onHomeClicked}>
               Home
@@ -29,7 +29,9 @@ const Header = (props) => {
             <Button className={classes.btn_chat} onClick={ctx.onMyPostsClicked}>
               My Posts
             </Button>
-            <Button className={classes.btn_chat}>Search</Button>
+            <Button className={classes.btn_chat} onClick={ctx.onSearchClicked}>
+              Search
+            </Button>
           </div>
         )}
       </div>

@@ -91,6 +91,7 @@ const EditDetails = (props) => {
                   value={password}
                   onChange={onPasswordChange}
                 />
+                <div className={classes.btn_wrapper}></div>
                 <Button
                   onClick={onPasswordSave}
                   className={passwordSaved ? classes.saved : ""}
