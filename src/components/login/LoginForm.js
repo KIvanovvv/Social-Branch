@@ -49,15 +49,16 @@ const LoginFrom = (props) => {
   const onPassBlurHandler = () => {
     setIsPasswordTouched(true);
   };
-  
+
   const onSignInHandler = async (e) => {
     e.preventDefault();
     if (!isFormValid) {
       return;
     }
-   
+
     try {
       const token = await login(email, password);
+      token.displayImage = token.imageUrl;
       sessionStorage.setItem("user", JSON.stringify(token));
       console.log(token);
       ctx.onHasUserLogged();

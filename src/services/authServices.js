@@ -138,3 +138,69 @@ export async function changeDescriptionById(id, description) {
     throw new Error();
   }
 }
+
+export async function updateHappy(id, imageUrl) {
+  try {
+    const response = await fetch(`http://localhost:3030/users/moods/happy`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+        imageUrl: imageUrl,
+      }),
+    });
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+export async function updateSad(id, imageUrl) {
+  try {
+    const response = await fetch(`http://localhost:3030/users/moods/sad`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+        imageUrl: imageUrl,
+      }),
+    });
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+export async function updateAngry(id, imageUrl) {
+  try {
+    const response = await fetch(`http://localhost:3030/users/moods/angry`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: id,
+        imageUrl: imageUrl,
+      }),
+    });
+    if (response.status !== 200) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}

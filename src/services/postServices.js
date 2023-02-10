@@ -8,7 +8,7 @@ export async function createPost(content) {
     },
     body: JSON.stringify({
       content: content,
-      imageUrl: user.imageUrl,
+      imageUrl: user.displayImage,
       ownerUsername: user.username,
       ownerId: user._id,
     }),
@@ -35,7 +35,7 @@ export async function createComment(content, postId) {
       content: content,
       postId: postId,
       username: user.username,
-      imageUrl: user.imageUrl,
+      imageUrl: user.displayImage,
     }),
   });
   const data = await response.json();

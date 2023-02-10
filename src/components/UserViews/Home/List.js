@@ -4,7 +4,6 @@ import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 
 export default function List(props) {
-
   const [commentsVisiable, setCommentsVisiable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [content, setContent] = useState("");

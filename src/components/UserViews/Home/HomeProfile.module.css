@@ -24,6 +24,52 @@
 
   margin-top: 15%;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+}
+.actions button {
+  font-size: 14px;
+  font-weight: bold;
+}
+.btn_neutral {
+  background: linear-gradient(
+    117deg,
+    rgba(169, 12, 200, 1) 30%,
+    rgba(42, 34, 194, 1) 60%,
+    rgba(164, 135, 228, 1) 100%
+  );
+}
+.btn_happy {
+  background: linear-gradient(
+    67deg,
+    rgba(46, 224, 102, 1) 0%,
+    rgba(91, 195, 124, 1) 46%,
+    rgba(52, 210, 89, 1) 93%
+  );
+}
+.btn_sad {
+  background: linear-gradient(
+    67deg,
+    rgba(230, 209, 84, 1) 0%,
+    rgba(195, 190, 91, 1) 46%,
+    rgba(210, 139, 52, 1) 93%
+  );
+}
+.btn_angry {
+  background: linear-gradient(
+    67deg,
+    rgba(210, 121, 115, 1) 0%,
+    rgba(209, 0, 0, 1) 46%,
+    rgba(236, 176, 64, 1) 93%
+  );
+}
+
 @media screen and (max-width: 1540px) {
   .wrapper {
     width: 200px;

@@ -6,7 +6,7 @@
     rgba(164, 135, 228, 1) 100%
   );
   width: 60%;
-  height: 70%;
+  height: 80%;
   border-radius: 25px;
   margin-top: 5%;
   padding: 20px 20px;
@@ -36,7 +36,7 @@
 .content {
   background-color: white;
   border-radius: 20px;
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   padding: 0px 15px;
@@ -82,8 +82,11 @@
 
 .list_cell_pic {
   background-color: #99b3ff;
+  height: 280px;
   display: flex;
-  align-items: center;
+  /* flex-direction: column; */
+  /* align-items: center;
+  justify-content: center; */
   /* justify-content: center; */
   /* margin-right: 6%; */
   font-size: 24px;
@@ -93,11 +96,63 @@
   gap: 10px;
 }
 
+.img_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* background-color: red; */
+  width: fit-content;
+  padding: 10px 10px;
+  gap: 10px;
+}
+.mood_text_neutral {
+  background: linear-gradient(
+    117deg,
+    rgba(169, 12, 200, 1) 30%,
+    rgba(42, 34, 194, 1) 60%,
+    rgba(164, 135, 228, 1) 100%
+  );
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+.mood_text_happy {
+  background: linear-gradient(
+    67deg,
+    rgba(46, 224, 102, 1) 0%,
+    rgba(91, 195, 124, 1) 46%,
+    rgba(52, 210, 89, 1) 93%
+  );
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+.mood_text_sad {
+  background: linear-gradient(
+    67deg,
+    rgba(230, 209, 84, 1) 0%,
+    rgba(195, 190, 91, 1) 46%,
+    rgba(210, 139, 52, 1) 93%
+  );
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+.mood_text_angry {
+  background: linear-gradient(
+    67deg,
+    rgba(210, 121, 115, 1) 0%,
+    rgba(209, 0, 0, 1) 46%,
+    rgba(236, 176, 64, 1) 93%
+  );
+  padding: 2px 10px;
+  border-radius: 20px;
+}
 .img_input {
   font-size: 18px;
   font-weight: bold;
   border-radius: 5px;
   border: 1px;
+  width: 120px;
 }
 
 .list_bottom {
@@ -106,13 +161,13 @@
   gap: 5px;
 }
 
-.list_left_pic {
+/* .list_left_pic {
   margin-left: 26%;
   padding-top: 8px;
-}
-.list_right_pic {
+} */
+/* .list_right_pic {
   margin-left: 5%;
-}
+} */
 
 .btn:hover {
   color: black;

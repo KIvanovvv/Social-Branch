@@ -1,7 +1,8 @@
 .container {
   width: 70%;
   border-radius: 10%;
-  margin-top: 10%;
+  margin-top: 5%;
+  margin-left: 2%;
 }
 @media screen and (max-width: 1540px) {
   .container {
