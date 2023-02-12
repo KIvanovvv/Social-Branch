@@ -55,7 +55,6 @@ const RegisterForm = () => {
   const onSignupHandler = async (e) => {
     e.preventDefault();
     if (!isFormValid) {
-      console.log(`Inputs are invalid`);
       return;
     }
 

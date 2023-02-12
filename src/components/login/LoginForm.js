@@ -60,7 +60,7 @@ const LoginFrom = (props) => {
       const token = await login(email, password);
       token.displayImage = token.imageUrl;
       sessionStorage.setItem("user", JSON.stringify(token));
-      console.log(token);
+
       ctx.onHasUserLogged();
     } catch (error) {
       setInputsAreInvalid(true);
