@@ -80,7 +80,7 @@ export default function List(props) {
               </div>
               <ul>
                 {comments.map((x) => (
-                  <li>
+                  <li key={x._id}>
                     <div
                       className={classes.img_comment}
                       style={{

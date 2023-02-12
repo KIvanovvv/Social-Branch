@@ -43,6 +43,7 @@ const EditDetails = (props) => {
     setImageSadUrl(e.target.value);
   }
   async function onSadSave() {
+    //TODO add display to user * bug when adding new photo main image becomes static
     const user = await updateSad(props.userData._id, imageSadUrl);
     setUserData(user);
     setUserDataChanged(true);
@@ -69,13 +70,13 @@ const EditDetails = (props) => {
       return;
     }
     const user = await changeUsernameById(props.userData._id, username);
-    const session = JSON.parse(sessionStorage.getItem("user"));
-    session.username = user.username;
-    sessionStorage.setItem("user", JSON.stringify(session));
-    setUsernameSaved(true);
+    user.displayImage = userData.displayImage;
+    setUserData(user);
+    setUserDataChanged(true);
   }
   function onUsernameChange(e) {
     setUsername(e.target.value);
+    // setUserDataChanged(true);
     console.log(username);
   }
 
@@ -88,10 +89,10 @@ const EditDetails = (props) => {
       return;
     }
     const user = await changeImageById(props.userData._id, imageUrl);
-    const session = JSON.parse(sessionStorage.getItem("user"));
-    session.imageUrl = user.imageUrl;
-    sessionStorage.setItem("user", JSON.stringify(session));
-    setImageSaved(true);
+    user.displayImage = userData.imageUrl;
+    setUserData(user);
+    setUserDataChanged(true);
+    setImageUrl("");
   }
 
   async function onPasswordSave() {
@@ -158,7 +159,9 @@ const EditDetails = (props) => {
                 <div className={classes.list_left_pic}>
                   <div
                     style={{
-                      backgroundImage: `url(${props.userData.imageUrl})`,
+                      backgroundImage: `url(${
+                        userData.imageUrl ? userData.imageUrl : staticPic
+                      })`,
                     }}
                     className={classes.img}
                   ></div>

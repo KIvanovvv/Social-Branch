@@ -11,7 +11,7 @@ const Header = (props) => {
   return (
     <div className={classes.header}>
       <div className={classes.name}>
-        <h2 onClick={ctx.onHome}>Social-Branch</h2>
+        <h2>Social-Branch</h2>
         {ctx.hasUserLogged && (
           <div className={classes.btns_user}>
             <div className={classes.welcome_user}>

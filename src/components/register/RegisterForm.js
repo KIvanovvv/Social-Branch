@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../UI/Button.js";
 import { register } from "../../services/authServices.js";
+import staticPic from "../../resources/profilePic.jpg";
 
 import classes from "./RegisterForm.module.css";
 import StateContext from "../state-ctx/state-ctx.js";
@@ -14,6 +15,7 @@ const RegisterForm = () => {
   const [repass, setRepass] = useState("");
   const [repassIsValid, setRepassIsValid] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [error, setError] = useState();
   const ctx = useContext(StateContext);
 
   let isFormValid = false;
@@ -56,10 +58,19 @@ const RegisterForm = () => {
       console.log(`Inputs are invalid`);
       return;
     }
-  
-    const token = await register(email, username, password, imageUrl);
-    sessionStorage.setItem("user", JSON.stringify(token));
-    ctx.onHasUserLogged();
+
+    try {
+      if (password != repass) {
+        throw new Error(`Passwords dont match`);
+      }
+      const token = await register(email, username, password, imageUrl);
+      token.displayImage = token.imageUrl ? token.imageUrl : staticPic;
+      sessionStorage.setItem("user", JSON.stringify(token));
+      ctx.onHasUserLogged();
+    } catch (err) {
+      setError(err.message);
+      console.log(error);
+    }
   };
   return (
     <>
@@ -68,33 +79,46 @@ const RegisterForm = () => {
           <h3 className={classes.header}>Create new account</h3>
         </div>
         <div>
+          {error && <p className={classes.error}>{error}</p>}
           <form onSubmit={onSignupHandler} className={classes.inputs}>
+            <div className={classes.input_field}>
+              {"*"}
+              <input
+                className={classes.username}
+                type="text"
+                placeholder="Email"
+                onChange={emailOnChangeHandler}
+              />
+            </div>
+            <div className={classes.input_field}>
+              {"*"}
+              <input
+                className={classes.username}
+                type="text"
+                placeholder="Username"
+                onChange={usernameOnChangeHandler}
+              />
+            </div>
+            <div className={classes.input_field}>
+              {"*"}
+              <input
+                className={classes.password}
+                type="password"
+                placeholder="Password"
+                onChange={passwordOnChangeHandler}
+              />
+            </div>
+            <div className={classes.input_field}>
+              {"*"}
+              <input
+                className={classes.password}
+                type="password"
+                placeholder="Repeat password"
+                onChange={repassOnChangeHandler}
+              />
+            </div>
             <input
-              className={classes.username}
-              type="text"
-              placeholder="Email"
-              onChange={emailOnChangeHandler}
-            />
-            <input
-              className={classes.username}
-              type="text"
-              placeholder="Username"
-              onChange={usernameOnChangeHandler}
-            />
-            <input
-              className={classes.password}
-              type="password"
-              placeholder="Password"
-              onChange={passwordOnChangeHandler}
-            />
-            <input
-              className={classes.password}
-              type="password"
-              placeholder="Repeat password"
-              onChange={repassOnChangeHandler}
-            />
-            <input
-              className={classes.password}
+              className={classes.image}
               type="text"
               placeholder="Image URL"
               onChange={imageOnChangeHandler}

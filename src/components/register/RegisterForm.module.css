@@ -20,12 +20,23 @@
   font-size: 28px;
 }
 
+.input_field {
+  display: flex;
+  flex-direction: row;
+}
+.error {
+  color: red;
+}
 .username,
 .password,
-.btn {
+.btn,
+.image {
   display: block;
   margin-top: 5px;
   font-size: 20px;
+}
+.image {
+  margin-left: 2.5%;
 }
 
 .btn {

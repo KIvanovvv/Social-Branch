@@ -49,9 +49,11 @@
 }
 
 .register:hover,
-.login:hover,
-.name {
+.login:hover {
   cursor: pointer;
+}
+.name h2:hover {
+  cursor: default;
 }
 
 .btns_user {

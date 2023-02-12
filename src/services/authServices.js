@@ -1,18 +1,28 @@
 export async function register(email, username, password, imageUrl) {
-  const response = await fetch(`http://localhost:3030/users/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-      imageUrl: imageUrl,
-      username: username,
-    }),
-  });
-  const data = await response.json();
-  return data;
+  try {
+    if (!email || !username || !password) {
+      throw new Error(`Fields with * are required`);
+    }
+    const response = await fetch(`http://localhost:3030/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        imageUrl: imageUrl,
+        username: username,
+      }),
+    });
+    if (response.status === 403) {
+      throw new Error(`Email is already taken`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }
 
 export async function login(email, password) {
@@ -55,6 +65,7 @@ export async function changeUsernameById(id, username) {
       throw new Error();
     }
     const data = await response.json();
+    // sessionStorage.setItem("user", JSON.stringify(data));
     return data;
   } catch (error) {
     throw new Error();
@@ -95,7 +106,7 @@ export async function changeImageById(id, imageUrl) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Authorization": user.accessToken,
+        // "X-Authorization": user.accessToken,
       },
       body: JSON.stringify({
         _id: id,
@@ -106,6 +117,7 @@ export async function changeImageById(id, imageUrl) {
       throw new Error();
     }
     const data = await response.json();
+    sessionStorage.setItem("user", JSON.stringify(data));
     return data;
   } catch (error) {
     throw new Error();
