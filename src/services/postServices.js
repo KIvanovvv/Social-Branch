@@ -1,6 +1,8 @@
+const host = "https://relieved-knickers-ox.cyclic.app";
+
 export async function createPost(content) {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const response = await fetch(`http://localhost:3030/posts/`, {
+  const response = await fetch(`${host}/posts/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,14 +20,14 @@ export async function createPost(content) {
 }
 
 export async function getAllPosts() {
-  const response = await fetch(`http://localhost:3030/posts/`);
+  const response = await fetch(`${host}/posts/`);
   const data = await response.json();
   return data.reverse();
 }
 
 export async function createComment(content, postId) {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const response = await fetch(`http://localhost:3030/posts/comments`, {
+  const response = await fetch(`${host}/posts/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -42,23 +44,21 @@ export async function createComment(content, postId) {
   return data;
 }
 export async function getComments(postId) {
-  const response = await fetch(
-    `http://localhost:3030/posts/comments/${postId}`
-  );
+  const response = await fetch(`${host}/posts/comments/${postId}`);
   const data = await response.json();
 
   return data.reverse();
 }
 
 export async function getUserPosts(id) {
-  const response = await fetch(`http://localhost:3030/posts/user/${id}`);
+  const response = await fetch(`${host}/posts/user/${id}`);
   const data = await response.json();
   return data.reverse();
 }
 
 export async function updatePostById(id, content) {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const response = await fetch(`http://localhost:3030/posts/update`, {
+  const response = await fetch(`${host}/posts/update`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export async function updatePostById(id, content) {
 
 export async function deletePostById(id) {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const response = await fetch(`http://localhost:3030/posts/delete`, {
+  const response = await fetch(`${host}/posts/delete`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export async function deletePostById(id) {
 
 export async function getPostsByQuery(query) {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const response = await fetch(`http://localhost:3030/posts/search`, {
+  const response = await fetch(`${host}/posts/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

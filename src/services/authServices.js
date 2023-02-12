@@ -1,9 +1,11 @@
+const host = "https://relieved-knickers-ox.cyclic.app";
+
 export async function register(email, username, password, imageUrl) {
   try {
     if (!email || !username || !password) {
       throw new Error(`Fields with * are required`);
     }
-    const response = await fetch(`http://localhost:3030/users/register`, {
+    const response = await fetch(`${host}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +29,7 @@ export async function register(email, username, password, imageUrl) {
 
 export async function login(email, password) {
   try {
-    const response = await fetch(`http://localhost:3030/users/login`, {
+    const response = await fetch(`${host}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +52,7 @@ export async function login(email, password) {
 export async function changeUsernameById(id, username) {
   const user = JSON.parse(sessionStorage.getItem("user"));
   try {
-    const response = await fetch(`http://localhost:3030/users/change`, {
+    const response = await fetch(`${host}/users/change`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +67,7 @@ export async function changeUsernameById(id, username) {
       throw new Error();
     }
     const data = await response.json();
-    // sessionStorage.setItem("user", JSON.stringify(data));
+
     return data;
   } catch (error) {
     throw new Error();
@@ -75,20 +77,17 @@ export async function changeUsernameById(id, username) {
 export async function changePasswordById(id, password) {
   const user = JSON.parse(sessionStorage.getItem("user"));
   try {
-    const response = await fetch(
-      `http://localhost:3030/users/change/password`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Authorization": user.accessToken,
-        },
-        body: JSON.stringify({
-          _id: id,
-          password: password,
-        }),
-      }
-    );
+    const response = await fetch(`${host}/users/change/password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization": user.accessToken,
+      },
+      body: JSON.stringify({
+        _id: id,
+        password: password,
+      }),
+    });
     if (response.status !== 200) {
       throw new Error();
     }
@@ -102,7 +101,7 @@ export async function changePasswordById(id, password) {
 export async function changeImageById(id, imageUrl) {
   const user = JSON.parse(sessionStorage.getItem("user"));
   try {
-    const response = await fetch(`http://localhost:3030/users/change/image`, {
+    const response = await fetch(`${host}/users/change/image`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -127,20 +126,17 @@ export async function changeImageById(id, imageUrl) {
 export async function changeDescriptionById(id, description) {
   const user = JSON.parse(sessionStorage.getItem("user"));
   try {
-    const response = await fetch(
-      `http://localhost:3030/users/change/description`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Authorization": user.accessToken,
-        },
-        body: JSON.stringify({
-          _id: id,
-          description: description,
-        }),
-      }
-    );
+    const response = await fetch(`${host}/users/change/description`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Authorization": user.accessToken,
+      },
+      body: JSON.stringify({
+        _id: id,
+        description: description,
+      }),
+    });
     if (response.status !== 200) {
       throw new Error();
     }
@@ -153,7 +149,7 @@ export async function changeDescriptionById(id, description) {
 
 export async function updateHappy(id, imageUrl) {
   try {
-    const response = await fetch(`http://localhost:3030/users/moods/happy`, {
+    const response = await fetch(`${host}/users/moods/happy`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -175,7 +171,7 @@ export async function updateHappy(id, imageUrl) {
 
 export async function updateSad(id, imageUrl) {
   try {
-    const response = await fetch(`http://localhost:3030/users/moods/sad`, {
+    const response = await fetch(`${host}/users/moods/sad`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -197,7 +193,7 @@ export async function updateSad(id, imageUrl) {
 
 export async function updateAngry(id, imageUrl) {
   try {
-    const response = await fetch(`http://localhost:3030/users/moods/angry`, {
+    const response = await fetch(`${host}/users/moods/angry`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

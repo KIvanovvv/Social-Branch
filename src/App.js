@@ -10,7 +10,6 @@ import StateContext from "./components/state-ctx/state-ctx.js";
 import Profile from "./components/UserViews/Profile/Profile.js";
 import MyPosts from "./components/UserViews/MyPosts/MyPosts.js";
 import { Search } from "./components/UserViews/Search/Search.js";
-// import db from "./services/firebase.js";
 
 function App() {
   // console.log("Ap: ", db);
