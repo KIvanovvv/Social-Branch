@@ -1,4 +1,4 @@
-const host = "https://relieved-knickers-ox.cyclic.app";
+const host = "http://relieved-knickers-ox.cyclic.app";
 
 export async function register(email, username, password, imageUrl) {
   try {
@@ -137,7 +137,7 @@ export async function changeDescriptionById(id, description) {
         description: description,
       }),
     });
-    if (response.status !== 200) {
+    if (!response.ok) {
       throw new Error();
     }
     const data = await response.json();

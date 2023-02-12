@@ -29,6 +29,7 @@ const EditDetails = (props) => {
 
   async function onAngrySave() {
     const user = await updateAngry(props.userData._id, imageAngryUrl);
+    user.displayImage = userData.displayImage;
     setUserData(user);
     setUserDataChanged(true);
     // setHappySaved(true);
@@ -45,6 +46,7 @@ const EditDetails = (props) => {
   async function onSadSave() {
     //TODO add display to user * bug when adding new photo main image becomes static
     const user = await updateSad(props.userData._id, imageSadUrl);
+    user.displayImage = userData.displayImage;
     setUserData(user);
     setUserDataChanged(true);
     // setHappySaved(true);
@@ -53,6 +55,7 @@ const EditDetails = (props) => {
 
   async function onHappySave() {
     const user = await updateHappy(props.userData._id, imageHappyUrl);
+    user.displayImage = userData.displayImage;
     setUserData(user);
     setUserDataChanged(true);
     // setHappySaved(true);
