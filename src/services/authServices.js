@@ -56,7 +56,7 @@ export async function changeUsernameById(id, username) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Authorization": user.accessToken,
+        // "X-Authorization": user.accessToken,
       },
       body: JSON.stringify({
         _id: id,
@@ -81,7 +81,7 @@ export async function changePasswordById(id, password) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Authorization": user.accessToken,
+        // "X-Authorization": user.accessToken,
       },
       body: JSON.stringify({
         _id: id,
@@ -130,7 +130,7 @@ export async function changeDescriptionById(id, description) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Authorization": user.accessToken,
+        // "X-Authorization": user.accessToken,
       },
       body: JSON.stringify({
         _id: id,
