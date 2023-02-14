@@ -19,8 +19,11 @@ const EditDetails = (props) => {
   const [imageUrl, setImageUrl] = useState("");
   const [imageSaved, setImageSaved] = useState(false);
   const [imageHappyUrl, setImageHappyUrl] = useState("");
+  const [imageHappySaved, setImageHappySaved] = useState(false);
   const [imageSadUrl, setImageSadUrl] = useState("");
+  const [imageSadSaved, setImageSadSaved] = useState(false);
   const [imageAngryUrl, setImageAngryUrl] = useState("");
+  const [imageAngrySaved, setImageAngrySaved] = useState(false);
   // const [happySaved, setHappySaved] = useState(false);
   const [userData, setUserData] = useState(
     JSON.parse(sessionStorage.getItem("user"))
@@ -30,9 +33,9 @@ const EditDetails = (props) => {
   async function onAngrySave() {
     const user = await updateAngry(props.userData._id, imageAngryUrl);
     user.displayImage = userData.displayImage;
+    setImageAngrySaved(true);
     setUserData(user);
     setUserDataChanged(true);
-    // setHappySaved(true);
     setImageAngryUrl("");
   }
 
@@ -44,21 +47,20 @@ const EditDetails = (props) => {
     setImageSadUrl(e.target.value);
   }
   async function onSadSave() {
-    //TODO add display to user * bug when adding new photo main image becomes static
     const user = await updateSad(props.userData._id, imageSadUrl);
     user.displayImage = userData.displayImage;
+    setImageSadSaved(true);
     setUserData(user);
     setUserDataChanged(true);
-    // setHappySaved(true);
     setImageSadUrl("");
   }
 
   async function onHappySave() {
     const user = await updateHappy(props.userData._id, imageHappyUrl);
     user.displayImage = userData.displayImage;
+    setImageHappySaved(true);
     setUserData(user);
     setUserDataChanged(true);
-    // setHappySaved(true);
     setImageHappyUrl("");
   }
   useEffect(() => {
@@ -74,12 +76,14 @@ const EditDetails = (props) => {
     }
     const user = await changeUsernameById(props.userData._id, username);
     user.displayImage = userData.displayImage;
+    setUsernameSaved(true);
     setUserData(user);
     setUserDataChanged(true);
   }
   function onUsernameChange(e) {
     setUsername(e.target.value);
-    // setUserDataChanged(true);
+    //  setUserDataChanged(true);
+
     console.log(username);
   }
 
@@ -93,6 +97,7 @@ const EditDetails = (props) => {
     }
     const user = await changeImageById(props.userData._id, imageUrl);
     user.displayImage = userData.imageUrl;
+    setImageSaved(true);
     setUserData(user);
     setUserDataChanged(true);
     setImageUrl("");
@@ -209,10 +214,10 @@ const EditDetails = (props) => {
                   />
                   <Button
                     onClick={onHappySave}
-                    className={imageSaved ? classes.saved : ""}
-                    disabled={imageSaved ? true : false}
+                    className={imageHappySaved ? classes.saved : ""}
+                    disabled={imageHappySaved ? true : false}
                   >
-                    {imageSaved ? "Saved" : "Save"}
+                    {imageHappySaved ? "Saved" : "Save"}
                   </Button>
                 </div>
               </div>
@@ -238,10 +243,10 @@ const EditDetails = (props) => {
                   />
                   <Button
                     onClick={onSadSave}
-                    className={imageSaved ? classes.saved : ""}
-                    disabled={imageSaved ? true : false}
+                    className={imageSadSaved ? classes.saved : ""}
+                    disabled={imageSadSaved ? true : false}
                   >
-                    {imageSaved ? "Saved" : "Save"}
+                    {imageSadSaved ? "Saved" : "Save"}
                   </Button>
                 </div>
               </div>
@@ -267,10 +272,10 @@ const EditDetails = (props) => {
                   />
                   <Button
                     onClick={onAngrySave}
-                    className={imageSaved ? classes.saved : ""}
-                    disabled={imageSaved ? true : false}
+                    className={imageAngrySaved ? classes.saved : ""}
+                    disabled={imageAngrySaved ? true : false}
                   >
-                    {imageSaved ? "Saved" : "Save"}
+                    {imageAngrySaved ? "Saved" : "Save"}
                   </Button>
                 </div>
               </div>

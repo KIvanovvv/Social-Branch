@@ -34,7 +34,7 @@ const Posts = () => {
     return (
       <ul className={classes.list}>
         {posts.map((data) => {
-          return <List data={data} />;
+          return <List data={data} key={data._id} />;
         })}
       </ul>
     );
