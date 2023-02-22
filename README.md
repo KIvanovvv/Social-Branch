@@ -29,6 +29,15 @@ Link to the deployed project  https://kivanovvv.github.io/Social-Branch---React-
 
 **Back-End:**  Express, MongoDB, Mongoose, JWT, Bcrypt
 
+## Test
+
+You can test the app functionality with the following accounts:
+
+- **Email**: rick@rick.com - **Password**: rickpass
+- **Email**: geralt@geralt.com - **Password**: geraltpass
+- **Email**: john@john.com - **Password**: johnpass
+- **Email**: smeagol@smeagol.com - **Password**: smeagolpass
+
 
 ## Screenshots
 **Guests:**
