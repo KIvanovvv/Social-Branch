@@ -1,5 +1,4 @@
-
-# Social-Branch
+# Social-Branch---React-Project
 
 This is a personal project, which resembles a social media app. The project is a Full Stack app, with the Front-End being build with React, deployed with GitHub Pages and the Back-End is an Express RESTAPI deployed on Cyclic and connected to a Cloud MongoDb running on Atlas.
 - Link to Back-End repo >>> https://github.com/KIvanovvv/SocialBranch-Backend
@@ -29,6 +28,15 @@ Link to the deployed project  https://kivanovvv.github.io/Social-Branch---React-
 **Front-End:** React, CSS
 
 **Back-End:**  Express, MongoDB, Mongoose, JWT, Bcrypt
+
+## Test
+
+You can test the app functionality with the following accounts:
+
+- **Email**: rick@rick.com - **Password**: rickpass
+- **Email**: geralt@geralt.com - **Password**: geraltpass
+- **Email**: john@john.com - **Password**: johnpass
+- **Email**: smeagol@smeagol.com - **Password**: smeagolpass
 
 
 ## Screenshots
