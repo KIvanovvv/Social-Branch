@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { getAllPosts, getUserPosts } from "../../../services/postServices.js";
-import StateContext from "../../state-ctx/state-ctx.js";
+import { getUserPosts } from "../../../services/postServices.js";
+import StateContext from "../../../state-ctx/state-ctx.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
 

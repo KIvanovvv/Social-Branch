@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "../UI/Button.js";
 import { register } from "../../services/authServices.js";
 import staticPic from "../../resources/profilePic.jpg";
-
 import classes from "./RegisterForm.module.css";
-import StateContext from "../state-ctx/state-ctx.js";
+import StateContext from "../../state-ctx/state-ctx.js";
+import Background from "../UI/Background.js";
+import { useNavigate } from "react-router-dom";
+
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(false);
@@ -17,6 +19,7 @@ const RegisterForm = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState();
   const ctx = useContext(StateContext);
+  const navigate = useNavigate();
 
   let isFormValid = false;
   useEffect(() => {
@@ -59,13 +62,14 @@ const RegisterForm = () => {
     }
 
     try {
-      if (password != repass) {
+      if (password !== repass) {
         throw new Error(`Passwords dont match`);
       }
       const token = await register(email, username, password, imageUrl);
       token.displayImage = token.imageUrl ? token.imageUrl : staticPic;
       sessionStorage.setItem("user", JSON.stringify(token));
       ctx.onHasUserLogged();
+      navigate("/home");
     } catch (err) {
       setError(err.message);
       console.log(error);
@@ -73,6 +77,7 @@ const RegisterForm = () => {
   };
   return (
     <>
+      <Background />
       <div className={classes.container}>
         <div>
           <h3 className={classes.header}>Create new account</h3>

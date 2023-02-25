@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { login } from "../../services/authServices.js";
-import StateContext from "../state-ctx/state-ctx.js";
+import StateContext from "../../state-ctx/state-ctx.js";
+import Background from "../UI/Background.js";
 import Button from "../UI/Button.js";
-
 import classes from "./LoginForm.module.css";
+import { useNavigate } from "react-router-dom";
 const LoginFrom = (props) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isEmailTouched, setIsEmailTouched] = useState(false);
@@ -30,7 +32,6 @@ const LoginFrom = (props) => {
   useEffect(() => {
     if (email.match(emailPattern)) {
       setIsEmailValid(true);
-      console.log(`email is valid`);
     }
     if (!email.match(emailPattern)) {
       setIsEmailValid(false);
@@ -60,7 +61,7 @@ const LoginFrom = (props) => {
       const token = await login(email, password);
       token.displayImage = token.imageUrl;
       sessionStorage.setItem("user", JSON.stringify(token));
-
+      navigate("/home");
       ctx.onHasUserLogged();
     } catch (error) {
       setInputsAreInvalid(true);
@@ -77,6 +78,7 @@ const LoginFrom = (props) => {
   };
   return (
     <>
+      <Background />
       <div className={classes.container}>
         <div className={classes.header}>
           <h3>Enter email and password</h3>

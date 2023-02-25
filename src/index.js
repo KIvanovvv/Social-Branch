@@ -3,13 +3,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { StateContextProvider } from "./components/state-ctx/state-ctx.js";
+import { StateContextProvider } from "./state-ctx/state-ctx.js";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <StateContextProvider>
-    <App />
-  </StateContextProvider>
+  <BrowserRouter>
+    <StateContextProvider>
+      <App />
+    </StateContextProvider>
+  </BrowserRouter>
 );
 
 reportWebVitals();

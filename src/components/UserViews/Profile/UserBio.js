@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { changeDescriptionById } from "../../../services/authServices.js";
 import Button from "../../UI/Button.js";
 import classes from "./UserBio.module.css";

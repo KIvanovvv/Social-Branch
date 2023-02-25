@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "../../UI/Button.js";
 import Posts from "./Posts.js";
 import classes from "./SearchBoard.module.css";
 

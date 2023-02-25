@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import staticPic from "../../../resources/profilePic.jpg";
 
 import classes from "./ProfilePic.module.css";
@@ -13,7 +13,6 @@ const ProfilePic = (props) => {
         className={classes.profile_img}
         style={{
           backgroundImage: `url(${
-            // userData.displayImage ? userData.displayImage : staticPic
             userData.imageUrl ? userData.imageUrl : staticPic
           })`,
         }}

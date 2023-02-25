@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./PostBoard.module.css";
-import profilePic from "../../../resources/profilePic.jpg";
 import Posts from "./Posts.js";
 const PostBoard = () => {
   return (

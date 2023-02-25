@@ -29,13 +29,18 @@
   gap: 40px;
 }
 
-.login {
+.login,
+.btn_home,
+.btn_profile,
+.btn_myposts,
+.btn_search {
   padding: 5px 25px;
   font-size: 18px;
   border-radius: 15px;
   border: none;
   background-color: #5500ff;
   color: white;
+  text-decoration: none;
 }
 
 .register {
@@ -46,6 +51,7 @@
   background-color: #5500ff;
   border: none;
   color: white;
+  text-decoration: none;
 }
 
 .register:hover,

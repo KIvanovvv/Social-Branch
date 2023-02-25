@@ -1,9 +1,15 @@
+import Background from "../../UI/Background.js";
 import classes from "./Search.module.css";
 import SearchBoard from "./SearchBoard.js";
-export function Search() {
+const Search = () => {
   return (
-    <div className={classes.wrapper}>
-      <SearchBoard />
-    </div>
+    <>
+      <Background />
+      <div className={classes.wrapper}>
+        <SearchBoard />
+      </div>
+    </>
   );
-}
+};
+
+export default Search;

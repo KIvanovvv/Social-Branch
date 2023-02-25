@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { createPost } from "../../../services/postServices.js";
-import StateContext from "../../state-ctx/state-ctx.js";
+import StateContext from "../../../state-ctx/state-ctx.js";
 import Button from "../../UI/Button.js";
 import classes from "./UserPost.module.css";
 const UserPost = () => {

@@ -5,7 +5,7 @@ import {
   getComments,
   updatePostById,
 } from "../../../services/postServices.js";
-import StateContext from "../../state-ctx/state-ctx.js";
+import StateContext from "../../../state-ctx/state-ctx.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 

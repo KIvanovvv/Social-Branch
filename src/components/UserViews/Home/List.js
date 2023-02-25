@@ -48,9 +48,7 @@ export default function List(props) {
           }}
         ></div>{" "}
         <div className={classes.content_post}>
-          <span className={classes.postName}>
-            {props.data.ownerUsername} :{" "}
-          </span>
+          <span className={classes.postName}>{props.data.ownerUsername} </span>
           <textarea
             readOnly={true}
             defaultValue={props.data.content}

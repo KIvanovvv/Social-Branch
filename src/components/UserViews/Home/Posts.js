@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getAllPosts } from "../../../services/postServices.js";
-import StateContext from "../../state-ctx/state-ctx.js";
-import Button from "../../UI/Button.js";
+import StateContext from "../../../state-ctx/state-ctx.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
 const Posts = () => {

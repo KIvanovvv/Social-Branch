@@ -50,7 +50,7 @@ export async function login(email, password) {
 }
 
 export async function changeUsernameById(id, username) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   try {
     const response = await fetch(`${host}/users/change`, {
       method: "POST",
@@ -75,7 +75,7 @@ export async function changeUsernameById(id, username) {
 }
 
 export async function changePasswordById(id, password) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   try {
     const response = await fetch(`${host}/users/change/password`, {
       method: "POST",
@@ -99,7 +99,7 @@ export async function changePasswordById(id, password) {
 }
 
 export async function changeImageById(id, imageUrl) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   try {
     const response = await fetch(`${host}/users/change/image`, {
       method: "POST",
@@ -124,7 +124,7 @@ export async function changeImageById(id, imageUrl) {
 }
 
 export async function changeDescriptionById(id, description) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   try {
     const response = await fetch(`${host}/users/change/description`, {
       method: "POST",
