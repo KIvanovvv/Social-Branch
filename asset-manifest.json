@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Social-Branch---React-Project/static/css/main.52506b7a.css",
-    "main.js": "/Social-Branch---React-Project/static/js/main.651d1cbe.js",
+    "main.css": "/Social-Branch---React-Project/static/css/main.9b9802d4.css",
+    "main.js": "/Social-Branch---React-Project/static/js/main.7d46544f.js",
     "static/js/787.514edfe9.chunk.js": "/Social-Branch---React-Project/static/js/787.514edfe9.chunk.js",
     "static/media/friends.jpg": "/Social-Branch---React-Project/static/media/friends.8cd296c6a30b87fb653a.jpg",
     "index.html": "/Social-Branch---React-Project/index.html",
-    "main.52506b7a.css.map": "/Social-Branch---React-Project/static/css/main.52506b7a.css.map",
-    "main.651d1cbe.js.map": "/Social-Branch---React-Project/static/js/main.651d1cbe.js.map",
+    "main.9b9802d4.css.map": "/Social-Branch---React-Project/static/css/main.9b9802d4.css.map",
+    "main.7d46544f.js.map": "/Social-Branch---React-Project/static/js/main.7d46544f.js.map",
     "787.514edfe9.chunk.js.map": "/Social-Branch---React-Project/static/js/787.514edfe9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.52506b7a.css",
-    "static/js/main.651d1cbe.js"
+    "static/css/main.9b9802d4.css",
+    "static/js/main.7d46544f.js"
   ]
 }
