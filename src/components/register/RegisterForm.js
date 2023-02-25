@@ -6,6 +6,7 @@ import classes from "./RegisterForm.module.css";
 import StateContext from "../../state-ctx/state-ctx.js";
 import Background from "../UI/Background.js";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../resources/Spinner.js";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ const RegisterForm = () => {
   const [repassIsValid, setRepassIsValid] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const ctx = useContext(StateContext);
   const navigate = useNavigate();
 
@@ -65,10 +67,12 @@ const RegisterForm = () => {
       if (password !== repass) {
         throw new Error(`Passwords dont match`);
       }
+      setIsLoading(true);
       const token = await register(email, username, password, imageUrl);
       token.displayImage = token.imageUrl ? token.imageUrl : staticPic;
       sessionStorage.setItem("user", JSON.stringify(token));
       ctx.onHasUserLogged();
+      setIsLoading(false);
       navigate("/home");
     } catch (err) {
       setError(err.message);
@@ -127,8 +131,12 @@ const RegisterForm = () => {
               placeholder="Image URL"
               onChange={imageOnChangeHandler}
             />
-            <Button className={classes.btn} type="submit">
-              Sign up
+            <Button
+              className={classes.btn}
+              type="submit"
+              disabled={isLoading ? true : false}
+            >
+              {isLoading ? <Spinner /> : "Sign up"}
             </Button>
           </form>
         </div>

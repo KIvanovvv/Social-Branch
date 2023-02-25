@@ -5,6 +5,7 @@ import Background from "../UI/Background.js";
 import Button from "../UI/Button.js";
 import classes from "./LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../resources/Spinner.js";
 const LoginFrom = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ const LoginFrom = (props) => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isPasswordTouched, setIsPasswordTouched] = useState(false);
   const [inputsAreInvalid, setInputsAreInvalid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const ctx = useContext(StateContext);
 
   const emailPattern = /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -58,9 +60,11 @@ const LoginFrom = (props) => {
     }
 
     try {
+      setIsLoading(true);
       const token = await login(email, password);
       token.displayImage = token.imageUrl;
       sessionStorage.setItem("user", JSON.stringify(token));
+      setIsLoading(false);
       navigate("/home");
       ctx.onHasUserLogged();
     } catch (error) {
@@ -76,6 +80,7 @@ const LoginFrom = (props) => {
       !isPasswordValid && isPasswordTouched && classes.invalid
     }`,
   };
+
   return (
     <>
       <Background />
@@ -110,8 +115,12 @@ const LoginFrom = (props) => {
                 Password must be at least 8 symbols !
               </p>
             )}
-            <Button className={classes.btn} type="submit">
-              Sign in
+            <Button
+              className={classes.btn}
+              type="submit"
+              disabled={isLoading ? true : false}
+            >
+              {isLoading ? <Spinner /> : "Sign in"}
             </Button>
           </form>
         </div>
