@@ -1,7 +1,6 @@
 const host = "https://relieved-knickers-ox.cyclic.app";
 
-export async function createPost(content) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+export async function createPost(content, user) {
   try {
     const response = await fetch(`${host}/posts/`, {
       method: "POST",
@@ -10,7 +9,7 @@ export async function createPost(content) {
       },
       body: JSON.stringify({
         content: content,
-        imageUrl: user.displayImage,
+        imageUrl: user.displayImage || user.imageUrl,
         ownerUsername: user.username,
         ownerId: user._id,
       }),

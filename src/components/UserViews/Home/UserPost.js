@@ -1,16 +1,18 @@
 import React, { useContext, useState } from "react";
 import { createPost } from "../../../services/postServices.js";
 import StateContext from "../../../state-ctx/state-ctx.js";
+import UserState from "../../../state-ctx/userState.js";
 import Button from "../../UI/Button.js";
 import classes from "./UserPost.module.css";
 const UserPost = () => {
   const ctx = useContext(StateContext);
   const [post, setPost] = useState("");
+  const { userData: ctxUserData } = useContext(UserState);
   const onPublishHandler = async () => {
     if (post.trim().length === 0) {
       return;
     }
-    await createPost(post);
+    await createPost(post, ctxUserData);
     setPost("");
     ctx.setPostUpdated(true);
   };

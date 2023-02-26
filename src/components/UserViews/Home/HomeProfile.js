@@ -8,7 +8,6 @@ const HomeProfile = () => {
   const [displayImageChanged, setDisplayImageChanged] = useState(false);
   const { userData: ctxUserData, setUserData: ctxSetUserData } =
     useContext(UserState);
-  console.log(ctxUserData);
 
   function onNeutralClick() {
     ctxUserData.displayImage = ctxUserData.imageUrl
