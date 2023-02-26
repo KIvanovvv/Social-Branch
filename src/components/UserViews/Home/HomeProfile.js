@@ -1,41 +1,53 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../../UI/Button.js";
 import classes from "./HomeProfile.module.css";
 import staticPic from "../../../resources/profilePic.jpg";
+import UserState from "../../../state-ctx/userState.js";
 
 const HomeProfile = () => {
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [displayImageChanged, setDisplayImageChanged] = useState(false);
-  // user.displayImage = user.imageUrl ? user.imageUrl : staticPic;
+  const { userData: ctxUserData, setUserData: ctxSetUserData } =
+    useContext(UserState);
+  console.log(ctxUserData);
+
   function onNeutralClick() {
-    user.displayImage = user.imageUrl ? user.imageUrl : staticPic;
-    setUser(user);
-    sessionStorage.setItem("user", JSON.stringify(user));
+    ctxUserData.displayImage = ctxUserData.imageUrl
+      ? ctxUserData.imageUrl
+      : staticPic;
+    ctxSetUserData(ctxUserData);
+    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
     setDisplayImageChanged(true);
   }
   function onHappyClick() {
-    user.displayImage = user.moods.happy ? user.moods.happy : staticPic;
-    setUser(user);
-    sessionStorage.setItem("user", JSON.stringify(user));
+    ctxUserData.displayImage = ctxUserData.moods.happy
+      ? ctxUserData.moods.happy
+      : staticPic;
+    ctxSetUserData(ctxUserData);
+    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
     setDisplayImageChanged(true);
   }
   function onSadClick() {
-    user.displayImage = user.moods.sad ? user.moods.sad : staticPic;
-    setUser(user);
-    sessionStorage.setItem("user", JSON.stringify(user));
+    ctxUserData.displayImage = ctxUserData.moods.sad
+      ? ctxUserData.moods.sad
+      : staticPic;
+    ctxSetUserData(ctxUserData);
+    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
     setDisplayImageChanged(true);
   }
   function onAngryClick() {
-    user.displayImage = user.moods.angry ? user.moods.angry : staticPic;
-    setUser(user);
-    sessionStorage.setItem("user", JSON.stringify(user));
+    ctxUserData.displayImage = ctxUserData.moods.angry
+      ? ctxUserData.moods.angry
+      : staticPic;
+    ctxSetUserData(ctxUserData);
+    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
     setDisplayImageChanged(true);
   }
 
   useEffect(() => {
-    sessionStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
     setDisplayImageChanged(false);
   }, [displayImageChanged]);
+
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -43,7 +55,9 @@ const HomeProfile = () => {
           className={classes.profile_img}
           style={{
             backgroundImage: `url(${
-              user.displayImage ? user.displayImage : staticPic
+              ctxUserData.displayImage
+                ? ctxUserData.displayImage
+                : ctxUserData.imageUrl || staticPic
             })`,
           }}
         ></div>

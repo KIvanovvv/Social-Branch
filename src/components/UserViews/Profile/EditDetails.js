@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./EditDetails.module.css";
 import Button from "../../UI/Button.js";
 import {
@@ -10,32 +10,29 @@ import {
   updateSad,
 } from "../../../services/authServices.js";
 import staticPic from "../../../resources/profilePic.jpg";
+import UserState from "../../../state-ctx/userState.js";
 
-const EditDetails = (props) => {
-  const [username, setUsername] = useState(props.userData.username);
+const EditDetails = () => {
+  const { userData: ctxUserData, setUserData: ctxSetUserData } =
+    useContext(UserState);
+  const [username, setUsername] = useState(ctxUserData.username);
   const [usernameSaved, setUsernameSaved] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordSaved, setPasswordSaved] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(ctxUserData.imageUrl);
   const [imageSaved, setImageSaved] = useState(false);
-  const [imageHappyUrl, setImageHappyUrl] = useState("");
+  const [imageHappyUrl, setImageHappyUrl] = useState(ctxUserData.moods?.happy);
   const [imageHappySaved, setImageHappySaved] = useState(false);
-  const [imageSadUrl, setImageSadUrl] = useState("");
+  const [imageSadUrl, setImageSadUrl] = useState(ctxUserData.moods?.sad);
   const [imageSadSaved, setImageSadSaved] = useState(false);
-  const [imageAngryUrl, setImageAngryUrl] = useState("");
+  const [imageAngryUrl, setImageAngryUrl] = useState(ctxUserData.moods?.angry);
   const [imageAngrySaved, setImageAngrySaved] = useState(false);
-  // const [happySaved, setHappySaved] = useState(false);
-  const [userData, setUserData] = useState(
-    JSON.parse(sessionStorage.getItem("user"))
-  );
-  const [userDataChanged, setUserDataChanged] = useState(false);
 
   async function onAngrySave() {
-    const user = await updateAngry(props.userData._id, imageAngryUrl);
-    user.displayImage = userData.displayImage;
+    const user = await updateAngry(ctxUserData._id, imageAngryUrl);
+    user.displayImage = ctxUserData.imageUrl;
     setImageAngrySaved(true);
-    setUserData(user);
-    setUserDataChanged(true);
+    ctxSetUserData(user);
     setImageAngryUrl("");
   }
 
@@ -47,25 +44,20 @@ const EditDetails = (props) => {
     setImageSadUrl(e.target.value);
   }
   async function onSadSave() {
-    const user = await updateSad(props.userData._id, imageSadUrl);
-    user.displayImage = userData.displayImage;
+    const user = await updateSad(ctxUserData._id, imageSadUrl);
+    user.displayImage = ctxUserData.imageUrl;
     setImageSadSaved(true);
-    setUserData(user);
-    setUserDataChanged(true);
+    ctxSetUserData(user);
     setImageSadUrl("");
   }
 
   async function onHappySave() {
-    const user = await updateHappy(props.userData._id, imageHappyUrl);
-    user.displayImage = userData.displayImage;
+    const user = await updateHappy(ctxUserData._id, imageHappyUrl);
+    user.displayImage = ctxUserData.imageUrl;
     setImageHappySaved(true);
-    setUserData(user);
-    setUserDataChanged(true);
+    ctxSetUserData(user);
     setImageHappyUrl("");
   }
-  useEffect(() => {
-    sessionStorage.setItem("user", JSON.stringify(userData));
-  }, [userDataChanged]);
 
   function onChangeHappy(e) {
     setImageHappyUrl(e.target.value);
@@ -74,17 +66,13 @@ const EditDetails = (props) => {
     if (!username.trim()) {
       return;
     }
-    const user = await changeUsernameById(props.userData._id, username);
-    user.displayImage = userData.displayImage;
+    const user = await changeUsernameById(ctxUserData._id, username);
+    user.displayImage = ctxUserData.displayImage;
     setUsernameSaved(true);
-    setUserData(user);
-    setUserDataChanged(true);
+    ctxSetUserData(user);
   }
   function onUsernameChange(e) {
     setUsername(e.target.value);
-    //  setUserDataChanged(true);
-
-    console.log(username);
   }
 
   function onImageChange(e) {
@@ -95,11 +83,10 @@ const EditDetails = (props) => {
     if (!imageUrl.trim()) {
       return;
     }
-    const user = await changeImageById(props.userData._id, imageUrl);
-    user.displayImage = userData.imageUrl;
+    const user = await changeImageById(ctxUserData._id, imageUrl);
+    user.displayImage = ctxUserData.imageUrl;
     setImageSaved(true);
-    setUserData(user);
-    setUserDataChanged(true);
+    ctxSetUserData(user);
     setImageUrl("");
   }
 
@@ -107,13 +94,14 @@ const EditDetails = (props) => {
     if (!password.trim()) {
       return;
     }
-    const user = await changePasswordById(props.userData._id, password);
+    await changePasswordById(ctxUserData._id, password);
     setPasswordSaved(true);
   }
 
   function onPasswordChange(e) {
     setPassword(e.target.value);
   }
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -168,7 +156,7 @@ const EditDetails = (props) => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        userData.imageUrl ? userData.imageUrl : staticPic
+                        ctxUserData.imageUrl ? ctxUserData.imageUrl : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -197,7 +185,9 @@ const EditDetails = (props) => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        userData.moods.happy ? userData.moods.happy : staticPic
+                        ctxUserData.moods.happy
+                          ? ctxUserData.moods.happy
+                          : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -226,7 +216,9 @@ const EditDetails = (props) => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        userData.moods.sad ? userData.moods.sad : staticPic
+                        ctxUserData.moods.sad
+                          ? ctxUserData.moods.sad
+                          : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -255,7 +247,9 @@ const EditDetails = (props) => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        userData.moods.angry ? userData.moods.angry : staticPic
+                        ctxUserData.moods.angry
+                          ? ctxUserData.moods.angry
+                          : staticPic
                       })`,
                     }}
                     className={classes.img}

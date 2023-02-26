@@ -2,21 +2,24 @@ const host = "https://relieved-knickers-ox.cyclic.app";
 
 export async function createPost(content) {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const response = await fetch(`${host}/posts/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Authorization": user.accessToken,
-    },
-    body: JSON.stringify({
-      content: content,
-      imageUrl: user.displayImage,
-      ownerUsername: user.username,
-      ownerId: user._id,
-    }),
-  });
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(`${host}/posts/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: content,
+        imageUrl: user.displayImage,
+        ownerUsername: user.username,
+        ownerId: user._id,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 export async function getAllPosts() {
@@ -31,7 +34,7 @@ export async function createComment(content, postId) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Authorization": user.accessToken,
+      // "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       content: content,
@@ -57,12 +60,12 @@ export async function getUserPosts(id) {
 }
 
 export async function updatePostById(id, content) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   const response = await fetch(`${host}/posts/update`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Authorization": user.accessToken,
+      // "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       content: content,
@@ -74,12 +77,12 @@ export async function updatePostById(id, content) {
 }
 
 export async function deletePostById(id) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   const response = await fetch(`${host}/posts/delete`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "X-Authorization": user.accessToken,
+      // "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       _id: id,

@@ -3,11 +3,16 @@ import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../UI/Button.js";
 import classes from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import UserState from "../../state-ctx/userState.js";
 const Header = (props) => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const ctx = useContext(StateContext);
+  const { userData: ctxUserData, setUserData: ctxSetUserData } =
+    useContext(UserState);
   const navigate = useNavigate();
   const onLogoutHandler = () => {
+    ctxSetUserData({});
+    sessionStorage.clear();
     navigate("/");
     ctx.onLogout();
   };
@@ -19,7 +24,7 @@ const Header = (props) => {
         {ctx.hasUserLogged && (
           <div className={classes.btns_user}>
             <div className={classes.welcome_user}>
-              <p>Welcome {user.username}</p>
+              <p>Welcome {ctxUserData.username}</p>
             </div>
             <Link className={classes.btn_home} to="/home">
               Home

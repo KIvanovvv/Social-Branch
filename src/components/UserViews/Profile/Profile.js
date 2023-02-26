@@ -13,6 +13,7 @@ const Profile = () => {
   return (
     <>
       <Background />
+
       <div className={classes.wrapper}>
         <div className={classes.left_column}>
           <ProfilePic userData={userData} />

@@ -10,8 +10,7 @@ const UserPost = () => {
     if (post.trim().length === 0) {
       return;
     }
-
-    const data = await createPost(post);
+    await createPost(post);
     setPost("");
     ctx.setPostUpdated(true);
   };

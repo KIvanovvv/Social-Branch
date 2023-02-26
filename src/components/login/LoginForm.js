@@ -6,8 +6,12 @@ import Button from "../UI/Button.js";
 import classes from "./LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../resources/Spinner.js";
+import UserState from "../../state-ctx/userState.js";
 const LoginFrom = (props) => {
   const navigate = useNavigate();
+  const { userData: ctxUserData, setUserData: ctxSetUserData } =
+    useContext(UserState);
+
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isEmailTouched, setIsEmailTouched] = useState(false);
@@ -63,6 +67,7 @@ const LoginFrom = (props) => {
       setIsLoading(true);
       const token = await login(email, password);
       token.displayImage = token.imageUrl;
+      ctxSetUserData(token);
       sessionStorage.setItem("user", JSON.stringify(token));
       setIsLoading(false);
       navigate("/home");

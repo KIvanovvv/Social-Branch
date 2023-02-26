@@ -4,15 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StateContextProvider } from "./state-ctx/state-ctx.js";
-import { HashRouter } from "react-router-dom";
-// The app is using HashRouter for github-pages compactability
+import { BrowserRouter } from "react-router-dom";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <HashRouter>
+  <BrowserRouter>
     <StateContextProvider>
       <App />
     </StateContextProvider>
-  </HashRouter>
+  </BrowserRouter>
 );
 
 reportWebVitals();

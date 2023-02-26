@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { changeDescriptionById } from "../../../services/authServices.js";
+import UserState from "../../../state-ctx/userState.js";
 import Button from "../../UI/Button.js";
 import classes from "./UserBio.module.css";
 
-const UserBio = (props) => {
-  const [bio, setBio] = useState(props.userData.description);
+const UserBio = () => {
+  const { userData: ctxUserData, setUserData: ctxSetUserData } =
+    useContext(UserState);
+  const [bio, setBio] = useState(ctxUserData.description);
   const [bioSaved, setBioSaved] = useState(false);
 
   function onChangeHandler(e) {
@@ -12,10 +15,8 @@ const UserBio = (props) => {
   }
 
   async function onSaveHandler() {
-    const user = await changeDescriptionById(props.userData._id, bio);
-    const session = JSON.parse(sessionStorage.getItem("user"));
-    session.description = user.description;
-    sessionStorage.setItem("user", JSON.stringify(session));
+    const user = await changeDescriptionById(ctxUserData._id, bio);
+    ctxSetUserData(user);
     setBioSaved(true);
   }
 
