@@ -38,14 +38,20 @@ export default function List(props) {
     if (commentsVisiable) {
     }
   }
+
+  function ProfileClickHandler(id) {
+    console.log(id);
+    // console.log(`Clicked`);
+  }
   return (
     <>
-      <li key={Math.random()}>
+      <li key={props.data._id}>
         <div
           className={classes.img}
           style={{
             backgroundImage: `url(${props.data.imageUrl})`,
           }}
+          onClick={() => ProfileClickHandler(props.data.ownerId)}
         ></div>{" "}
         <div className={classes.content_post}>
           <span className={classes.postName}>{props.data.ownerUsername} </span>

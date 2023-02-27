@@ -79,6 +79,7 @@ const RegisterForm = () => {
       setIsLoading(false);
       navigate("/home");
     } catch (err) {
+      setIsLoading(false);
       setError(err.message);
       console.log(error);
     }

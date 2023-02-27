@@ -17,13 +17,11 @@ const Posts = () => {
       setIsLoading(false);
       setHasLoaded(true);
       setPosts(postsData);
-      console.log(postsData);
     };
     fetchPosts();
     ctx.setPostUpdated(false);
   }, [ctx.postUpdated]);
   if (!hasLoaded && isLoading) {
-    // console.log(`Loading....`);
     return (
       <ul className={classes.list}>
         <div className={classes.loading}>Loading ...</div>
@@ -32,7 +30,6 @@ const Posts = () => {
   }
 
   if (hasLoaded) {
-    // console.log(posts);
     return (
       <ul className={classes.list}>
         {posts.map((data) => {

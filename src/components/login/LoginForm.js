@@ -73,6 +73,7 @@ const LoginFrom = (props) => {
       navigate("/home");
       ctx.onHasUserLogged();
     } catch (error) {
+      setIsLoading(false);
       setInputsAreInvalid(true);
     }
   };

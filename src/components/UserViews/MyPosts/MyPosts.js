@@ -7,11 +7,9 @@ const MyPosts = () => {
   return (
     <>
       <Background />
-      <UserState.Provider>
-        <div className={classes.wrapper}>
-          <PostBoard />
-        </div>
-      </UserState.Provider>
+      <div className={classes.wrapper}>
+        <PostBoard />
+      </div>
     </>
   );
 };

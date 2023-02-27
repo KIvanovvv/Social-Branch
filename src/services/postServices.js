@@ -92,12 +92,12 @@ export async function deletePostById(id) {
 }
 
 export async function getPostsByQuery(query) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = JSON.parse(sessionStorage.getItem("user"));
   const response = await fetch(`${host}/posts/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Authorization": user.accessToken,
+      // "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       query: query,
