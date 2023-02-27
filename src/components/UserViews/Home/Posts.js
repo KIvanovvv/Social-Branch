@@ -3,7 +3,7 @@ import { getAllPosts } from "../../../services/postServices.js";
 import StateContext from "../../../state-ctx/state-ctx.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
-const Posts = () => {
+const Posts = ({ modalVisible,setModalUserId }) => {
   const ctx = useContext(StateContext);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +20,6 @@ const Posts = () => {
     ctx.setPostUpdated(false);
   }, [ctx.postUpdated]);
   if (!hasLoaded && isLoading) {
-    // console.log(`Loading....`);
     return (
       <ul className={classes.list}>
         <div className={classes.loading}>Loading ...</div>
@@ -29,11 +28,12 @@ const Posts = () => {
   }
 
   if (hasLoaded) {
-    // console.log(posts);
     return (
       <ul className={classes.list}>
         {posts.map((data) => {
-          return <List data={data} key={data._id} />;
+          return (
+            <List data={data} key={data._id} modalVisible={modalVisible} setModalUserId={setModalUserId}/>
+          );
         })}
       </ul>
     );

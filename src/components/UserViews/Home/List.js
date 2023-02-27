@@ -40,8 +40,8 @@ export default function List(props) {
   }
 
   function ProfileClickHandler(id) {
-    console.log(id);
-    // console.log(`Clicked`);
+    props.setModalUserId(id)
+    props.modalVisible(true);
   }
   return (
     <>

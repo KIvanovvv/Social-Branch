@@ -212,3 +212,16 @@ export async function updateAngry(id, imageUrl) {
     throw new Error();
   }
 }
+
+export async function getUserById(id) {
+  try {
+    const response = await fetch(`${host}/users/find/${id}`);
+    if (!response.ok) {
+      throw new Error();
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error(`Something went wrong`);
+  }
+}

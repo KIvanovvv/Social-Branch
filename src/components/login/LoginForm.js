@@ -126,7 +126,7 @@ const LoginFrom = (props) => {
               type="submit"
               disabled={isLoading ? true : false}
             >
-              {isLoading ? <Spinner /> : "Sign in"}
+              {isLoading ? <Spinner w={15} h={17} /> : "Sign in"}
             </Button>
           </form>
         </div>

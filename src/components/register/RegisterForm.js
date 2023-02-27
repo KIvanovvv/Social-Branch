@@ -141,7 +141,7 @@ const RegisterForm = () => {
               type="submit"
               disabled={isLoading ? true : false}
             >
-              {isLoading ? <Spinner /> : "Sign up"}
+              {isLoading ? <Spinner w={15} h={17} /> : "Sign up"}
             </Button>
           </form>
         </div>
