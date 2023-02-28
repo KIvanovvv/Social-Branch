@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../UI/Button.js";
 import classes from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import UserState from "../../state-ctx/userState.js";
+import { getUserById } from "../../services/authServices.js";
 const Header = (props) => {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const [messages, setMessages] = useState([]);
   const ctx = useContext(StateContext);
   const { userData: ctxUserData, setUserData: ctxSetUserData } =
     useContext(UserState);
   const navigate = useNavigate();
+  const hasNewMsg = ctxUserData.messages.some((x) => x.isViewed === false);
   const onLogoutHandler = () => {
     ctxSetUserData({});
     sessionStorage.clear();
@@ -37,6 +39,14 @@ const Header = (props) => {
             </Link>
             <Link className={classes.btn_search} to="/search">
               Search
+            </Link>
+            <Link className={classes.btn_message} to="/messages">
+              Messages{" "}
+              <div
+                className={
+                  hasNewMsg ? classes.message_dot_new : classes.message_dot_old
+                }
+              ></div>
             </Link>
           </div>
         )}

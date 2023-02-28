@@ -10,6 +10,7 @@ import MyPosts from "./components/UserViews/MyPosts/MyPosts.js";
 import Search from "./components/UserViews/Search/Search.js";
 import { Routes, Route } from "react-router-dom";
 import UserState from "./state-ctx/userState.js";
+import Messages from "./components/UserViews/Messages/Messages.js";
 
 function App() {
   const [userData, setUserData] = useState({});
@@ -26,6 +27,7 @@ function App() {
           <Route path={`/profile`} element={<Profile />} />
           <Route path={`/mypost`} element={<MyPosts />} />
           <Route path={`/search`} element={<Search />} />
+          <Route path={`/messages`} element={<Messages />} />
         </Routes>
       </UserState.Provider>
     </div>
