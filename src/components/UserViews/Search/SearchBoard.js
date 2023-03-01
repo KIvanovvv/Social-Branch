@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Posts from "./Posts.js";
 import classes from "./SearchBoard.module.css";
 
-export const SearchBoard = () => {
+export const SearchBoard = ({modalVisible,setModalUserId}) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   function onChangeHandler(e) {
@@ -26,7 +26,7 @@ export const SearchBoard = () => {
           />
         </div>
       </div>
-      <div className={classes.content}>{<Posts query={searchQuery} />}</div>
+      <div className={classes.content}>{<Posts query={searchQuery}  modalVisible={modalVisible} setModalUserId={setModalUserId}/>}</div>
     </div>
   );
 };

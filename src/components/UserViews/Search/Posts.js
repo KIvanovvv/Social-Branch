@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Spinner from "../../../resources/Spinner.js";
 import { getPostsByQuery } from "../../../services/postServices.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
@@ -22,9 +23,9 @@ const Posts = (props) => {
   }, [props.query]);
   if (!hasLoaded && isLoading) {
     return (
-      <ul className={classes.list}>
-        <div className={classes.loading}>Loading ...</div>
-      </ul>
+      <div className={classes.spinner_container}>
+        <Spinner className={classes.spinner} w={400} h={400} />
+      </div>
     );
   }
 
@@ -32,7 +33,14 @@ const Posts = (props) => {
     return (
       <ul className={classes.list}>
         {posts.map((data) => {
-          return <List data={data} key={data._id} />;
+          return (
+            <List
+              data={data}
+              key={data._id}
+              modalVisible={props.modalVisible}
+              setModalUserId={props.setModalUserId}
+            />
+          );
         })}
       </ul>
     );

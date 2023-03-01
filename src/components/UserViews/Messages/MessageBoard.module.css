@@ -6,7 +6,7 @@
     rgba(164, 135, 228, 1) 100%
   );
   width: 40%;
-  height: 60%;
+  height: 70%;
   border-radius: 25px;
   margin-top: 3.5%;
   display: flex;
@@ -44,6 +44,7 @@
   flex-direction: column;
   gap: 15px;
   justify-self: center;
+  overflow: visible;
 }
 .btn {
   height: 20px;
@@ -81,4 +82,17 @@
 }
 .btn_container button {
   width: 100%;
+}
+
+.btn_refresh {
+  align-self: center;
+}
+
+.no_msg {
+  background-color: #99b3ff;
+  padding: 0 200px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
 }

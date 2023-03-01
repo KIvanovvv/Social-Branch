@@ -1,43 +1,74 @@
 import { useState } from "react";
+import Spinner from "../../../resources/Spinner.js";
+import { viewMessage } from "../../../services/messageService.js";
 import Button from "../../UI/Button.js";
 import classes from "./MessageList.module.css";
 
-const MessageList = ({ msgObj }) => {
+const MessageList = ({ msgObj, modalVisible, setModalUserId }) => {
   const [viewed, setViewed] = useState(msgObj.isViewed);
-  console.log(viewed);
-  function onShowHandler() {
+  const [msgVisible, setMsgVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  async function onShowHandler() {
     if (!viewed) {
+      setIsLoading(true);
       setViewed(true);
-      // await messageViewed()
+      msgObj.isViewed = true;
+      await viewMessage(msgObj._id);
+      setIsLoading(false);
     }
+    setMsgVisible((curr) => !curr);
   }
-  return (
-    <li>
-      <div className={classes.list_container}>
-        <p
-          className={
-            msgObj.isViewed
-              ? classes.announncementOld
-              : classes.announncementNew
-          }
-        >
-          {msgObj.isViewed
-            ? "You already saw this message"
-            : "You have a new message"}{" "}
-        </p>
-        <div className={classes.user_container}>
-          <div
-            className={classes.img}
-            style={{
-              backgroundImage: `url(${msgObj.ownerImg})`,
-            }}
-          />
-          <p className={classes.username}>{msgObj.ownerUsername}</p>
-        </div>
 
-        <Button className={classes.btn} onClick={onShowHandler}>
-          Show message
-        </Button>
+  function onProfileClickHandler(id) {
+    setModalUserId(id);
+    modalVisible(true);
+  }
+
+  return (
+    <li className={classes.li}>
+      <div className={classes.list_container}>
+        <div className={classes.header_container}>
+          <p
+            className={
+              msgObj.isViewed
+                ? classes.announncementOld
+                : classes.announncementNew
+            }
+          >
+            {msgObj.isViewed
+              ? "You already saw this message"
+              : "You have a new message"}{" "}
+          </p>
+          <div className={classes.user_container}>
+            <div
+              className={classes.img}
+              onClick={() => onProfileClickHandler(msgObj.senderId)}
+              style={{
+                backgroundImage: `url(${msgObj.senderImage})`,
+              }}
+            />
+            <p className={classes.username}>{msgObj.senderUsername}</p>
+          </div>
+
+          <Button className={classes.btn} onClick={onShowHandler}>
+            {msgVisible ? "Hide message" : "Show message"}
+          </Button>
+        </div>
+        <div className={classes.msg_container}>
+          {" "}
+          {isLoading && <Spinner w={60} h={60} />}
+          {msgVisible && (
+            <>
+              <p>Message: </p>
+              <textarea
+                rows={2}
+                cols={65}
+                defaultValue={msgObj.content}
+                readOnly={true}
+              ></textarea>
+            </>
+          )}
+        </div>
       </div>
     </li>
   );

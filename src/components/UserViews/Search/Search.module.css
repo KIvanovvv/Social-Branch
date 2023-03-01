@@ -4,3 +4,12 @@
   align-self: center;
   width: 70%;
 }
+
+.backdrop {
+  z-index: 1;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: darkslategrey;
+  opacity: 0.7;
+}

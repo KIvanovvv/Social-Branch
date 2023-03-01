@@ -23,7 +23,6 @@ const Home = () => {
   }, [modalUserId]);
 
   function backdropOnBlur() {
-    //Change onBlur to ModalComponent
     setUserModalVisible(false);
     setModalUserId("");
   }

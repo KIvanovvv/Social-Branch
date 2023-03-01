@@ -38,6 +38,10 @@ export default function List(props) {
     if (commentsVisiable) {
     }
   }
+  function ProfileClickHandler(id) {
+    props.setModalUserId(id);
+    props.modalVisible(true);
+  }
   return (
     <>
       <li key={Math.random()}>
@@ -46,6 +50,7 @@ export default function List(props) {
           style={{
             backgroundImage: `url(${props.data.imageUrl})`,
           }}
+          onClick={() => ProfileClickHandler(props.data.ownerId)}
         ></div>{" "}
         <div className={classes.content_post}>
           <span className={classes.postName}>{props.data.ownerUsername} </span>

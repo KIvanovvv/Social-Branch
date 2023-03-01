@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Spinner from "../../resources/Spinner.js";
-import { sendMessage } from "../../services/authServices.js";
+import { sendMessage } from "../../services/messageService.js";
 import UserState from "../../state-ctx/userState.js";
 import Button from "./Button.js";
 import classes from "./UserModal.module.css";
@@ -8,6 +8,7 @@ import classes from "./UserModal.module.css";
 const UserModal = ({ modalLoading, user }) => {
   const [sendMessageVisible, setSendMessageVisible] = useState(false);
   const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
   const { userData: ctxUserData } = useContext(UserState);
 
   function sendMessageHandler() {
@@ -18,8 +19,15 @@ const UserModal = ({ modalLoading, user }) => {
     setMessage(e.target.value);
   }
   async function onSendHandler() {
-    const reciver = await sendMessage(user._id, message, ctxUserData);
-    console.log(reciver);
+    setIsSending(true);
+    const reciver = await sendMessage(
+      message,
+      user._id,
+      ctxUserData._id,
+      ctxUserData.imageUrl,
+      ctxUserData.username
+    );
+    setIsSending(false);
     setMessage("");
   }
 
@@ -80,7 +88,9 @@ const UserModal = ({ modalLoading, user }) => {
               value={message}
               placeholder={`Send message to ${user.username} ...`}
             />
-            <Button onClick={onSendHandler}>Send</Button>
+            <Button onClick={onSendHandler}>
+              {isSending ? <Spinner w={15} h={15} /> : "Send"}
+            </Button>
           </div>
         )}
       </div>

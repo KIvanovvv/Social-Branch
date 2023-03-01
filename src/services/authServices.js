@@ -225,26 +225,3 @@ export async function getUserById(id) {
     throw new Error(`Something went wrong`);
   }
 }
-
-export async function sendMessage(id, message, senderData) {
-  try {
-    const response = await fetch(`${host}/users/messages`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: id,
-        message: message,
-        senderData: senderData,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error();
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error();
-  }
-}

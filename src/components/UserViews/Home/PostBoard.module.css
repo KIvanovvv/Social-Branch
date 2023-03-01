@@ -61,19 +61,12 @@
   display: flex;
   justify-content: space-between;
   background-color: green;
-  /* margin-bottom: 0.2%;
-  margin-right: 4%; */
 }
 .list p {
   align-self: flex-end;
   flex-grow: 1;
   margin-left: 2%;
 }
-/* .list button {
-  align-self: flex-end;
-  justify-self: right;
-   margin-left: 40%; 
-} */
 
 .btn_container {
   margin-right: 2%;
