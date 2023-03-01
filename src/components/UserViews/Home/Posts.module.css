@@ -44,11 +44,12 @@
   flex-grow: 1;
   margin-left: 2%;
 }
-/* .list button {
-  align-self: flex-end;
-  justify-self: right;
-   margin-left: 40%; 
-} */
+.spinner_container {
+  display: flex;
+  width: 1200px;
+  justify-content: center;
+  align-items: center;
+}
 
 .btn_container {
   margin-right: 2%;

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Spinner from "../../../resources/Spinner.js";
 import { getUserPosts } from "../../../services/postServices.js";
 import StateContext from "../../../state-ctx/state-ctx.js";
 import List from "./List.js";
@@ -23,9 +24,9 @@ const Posts = () => {
   }, [ctx.postUpdated]);
   if (!hasLoaded && isLoading) {
     return (
-      <ul className={classes.list}>
-        <div className={classes.loading}>Loading ...</div>
-      </ul>
+      <div className={classes.spinner_container}>
+      <Spinner className={classes.spinner} w={400} h={400} />
+    </div>
     );
   }
 
