@@ -35,8 +35,10 @@ const Search = () => {
         </>
       )}
       <div className={classes.wrapper}>
-        <SearchBoard     modalVisible={setUserModalVisible}
-            setModalUserId={setModalUserId}/>
+        <SearchBoard
+          modalVisible={setUserModalVisible}
+          setModalUserId={setModalUserId}
+        />
       </div>
     </>
   );

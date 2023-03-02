@@ -1,0 +1,24 @@
+.ul {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 14px;
+  margin: 0;
+  gap: 20px;
+  overflow: auto;
+  flex-wrap: wrap;
+  background: linear-gradient(
+    117deg,
+    rgba(169, 12, 200, 1) 30%,
+    rgba(42, 34, 194, 1) 60%,
+    rgba(164, 135, 228, 1) 100%
+  );
+  border-radius: 20px;
+}
+
+.wrapper {
+  width: 1200px;
+  padding: 10px 30px;
+  overflow: auto;
+}
+

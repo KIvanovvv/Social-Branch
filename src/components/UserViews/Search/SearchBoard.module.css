@@ -64,6 +64,14 @@
   align-items: center;
 }
 
+.clicked {
+  background-color: #99b3ff;
+  font-weight: bold;
+}
+.not_clicked {
+  font-weight: bold;
+}
+
 .img {
   background-color: purple;
   width: 100px;

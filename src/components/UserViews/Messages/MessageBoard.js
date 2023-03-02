@@ -18,7 +18,7 @@ const MessageBoard = ({ modalVisible, setModalUserId }) => {
       setMessages(await getMessagesByUserId(ctxUserData._id));
       setLoadingMessages(false);
     })();
-  }, [reloadMsg]);
+  }, [reloadMsg, ctxUserData._id]);
 
   function onReload() {
     setReloadMsg((curr) => !curr);

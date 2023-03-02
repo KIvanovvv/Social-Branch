@@ -31,7 +31,7 @@ export default function List(props) {
     }
     loadComments();
     setCommentsUpdated(false);
-  }, [commentsUpdated]);
+  }, [commentsUpdated, props.data._id]);
 
   async function viewComments() {
     setCommentsVisiable((curr) => !curr);

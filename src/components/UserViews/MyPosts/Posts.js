@@ -21,12 +21,12 @@ const Posts = () => {
     };
     fetchPosts();
     ctx.setPostUpdated(false);
-  }, [ctx.postUpdated]);
+  }, [ctx.postUpdated, ctx, user._id]);
   if (!hasLoaded && isLoading) {
     return (
       <div className={classes.spinner_container}>
-      <Spinner className={classes.spinner} w={400} h={400} />
-    </div>
+        <Spinner className={classes.spinner} w={400} h={400} />
+      </div>
     );
   }
 

@@ -20,7 +20,7 @@ const UserModal = ({ modalLoading, user }) => {
   }
   async function onSendHandler() {
     setIsSending(true);
-    const reciver = await sendMessage(
+    await sendMessage(
       message,
       user._id,
       ctxUserData._id,

@@ -19,7 +19,7 @@ const Posts = ({ modalVisible, setModalUserId }) => {
     };
     fetchPosts();
     ctx.setPostUpdated(false);
-  }, [ctx.postUpdated]);
+  }, [ctx.postUpdated, ctx]);
   if (!hasLoaded && isLoading) {
     return (
       <div className={classes.spinner_container}>
