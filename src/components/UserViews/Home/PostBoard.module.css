@@ -75,3 +75,9 @@
 .btn_container button {
   width: 100%;
 }
+
+@media screen and (max-width: 1540px) {
+  .container {
+    height: 77%;
+  }
+}

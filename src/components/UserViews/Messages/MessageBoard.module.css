@@ -96,3 +96,10 @@
   font-weight: bold;
   color: white;
 }
+
+@media screen and (max-width: 1540px) {
+  .container {
+    width: 50%;
+    height: 75%;
+  }
+}

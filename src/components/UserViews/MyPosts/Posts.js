@@ -33,9 +33,15 @@ const Posts = () => {
   if (hasLoaded) {
     return (
       <ul className={classes.list}>
-        {posts.map((data) => {
-          return <List data={data} key={data._id} />;
-        })}
+        {posts.length > 0 ? (
+          posts.map((data) => {
+            return <List data={data} key={data._id} />;
+          })
+        ) : (
+          <li className={classes.empty_list}>
+            <p>You haven't made any posts yet.</p>
+          </li>
+        )}
       </ul>
     );
   }

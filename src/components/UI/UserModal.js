@@ -67,7 +67,7 @@ const UserModal = ({ modalLoading, user }) => {
                   />
                 </div>
 
-                <p className={classes.bio}>
+                <p className={classes.email_header}>
                   <span>Email: </span>
                   {user.email}
                 </p>

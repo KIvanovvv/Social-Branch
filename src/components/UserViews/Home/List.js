@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Spinner from "../../../resources/Spinner.js";
 import { createComment, getComments } from "../../../services/postServices.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
@@ -31,7 +32,7 @@ export default function List(props) {
     }
     loadComments();
     setCommentsUpdated(false);
-  }, [commentsUpdated]);
+  }, [commentsUpdated, props.data._id]);
 
   async function viewComments() {
     setCommentsVisiable((curr) => !curr);
@@ -40,7 +41,7 @@ export default function List(props) {
   }
 
   function ProfileClickHandler(id) {
-    props.setModalUserId(id)
+    props.setModalUserId(id);
     props.modalVisible(true);
   }
   return (
@@ -69,39 +70,39 @@ export default function List(props) {
       </li>
       {commentsVisiable && (
         <div className={classes.comment_section}>
-          {isLoading && <p>Loading...</p>}
-          {!isLoading && (
-            <>
-              {" "}
-              <div className={classes.actions}>
-                <input
-                  type="text"
-                  placeholder="Your comment..."
-                  onChange={onChangeHandler}
-                  value={content}
-                />
-                <Button onClick={addComment}>Publish</Button>
-              </div>
-              <ul>
-                {comments.map((x) => (
-                  <li key={x._id}>
-                    <div
-                      className={classes.img_comment}
-                      style={{
-                        backgroundImage: `url(${x.imageUrl})`,
-                      }}
-                    ></div>
-                    <p className={classes.comment_p}>
-                      <span className={classes.comment_author}>
-                        {x.username}:
-                      </span>{" "}
-                      {x.content}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
+          
+          <>
+            {" "}
+            <div className={classes.actions}>
+              <input
+                type="text"
+                placeholder="Your comment..."
+                onChange={onChangeHandler}
+                value={content}
+              />
+              <Button onClick={addComment}>
+                {isLoading ? <Spinner w={15} h={15} /> : "Publish"}
+              </Button>
+            </div>
+            <ul className={classes.comments_ul}>
+              {comments.map((x) => (
+                <li key={x._id}>
+                  <div
+                    className={classes.img_comment}
+                    style={{
+                      backgroundImage: `url(${x.imageUrl})`,
+                    }}
+                  ></div>
+                  <p className={classes.comment_p}>
+                    <span className={classes.comment_author}>
+                      {x.username}:
+                    </span>{" "}
+                    {x.content}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </>
         </div>
       )}
     </>

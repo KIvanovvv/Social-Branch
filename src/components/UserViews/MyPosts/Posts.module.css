@@ -190,6 +190,19 @@
   gap: 15px;
 }
 
+.empty_list {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  align-self: center;
+  width: 350px;
+}
+.comments_ul {
+  overflow: auto;
+  height: 200px;
+}
+
 @media screen and (max-width: 1540px) {
   .content_post textarea {
     width: 470px;

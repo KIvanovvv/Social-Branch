@@ -102,7 +102,6 @@
 .comment_author {
   color: white;
   font-weight: bold;
-
 }
 .comment_p {
   padding: 0;
@@ -132,6 +131,11 @@
   height: 100px;
   outline: none;
 }
+.comments_ul {
+  overflow: auto;
+  height: 200px;
+}
+
 @media screen and (max-width: 1540px) {
   .content_post textarea {
     width: 580px;

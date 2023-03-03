@@ -81,7 +81,7 @@ export default function List(props) {
                 />
                 <Button onClick={addComment}>Publish</Button>
               </div>
-              <ul>
+              <ul className={classes.comments_ul}>
                 {comments.map((x) => (
                   <li>
                     <div

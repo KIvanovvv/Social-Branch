@@ -22,7 +22,6 @@ export default function List(props) {
   const [isDeleteActive, setIsDeleteActive] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
 
-  // console.log(postContent);
   async function onConfirmDeleteHandler() {
     await deletePostById(props.data._id);
     setIsDeleteActive(false);
@@ -183,7 +182,7 @@ export default function List(props) {
                 />
                 <Button onClick={addComment}>Publish</Button>
               </div>
-              <ul>
+              <ul className={classes.comments_ul}>
                 {comments.map((x) => (
                   <li>
                     <div

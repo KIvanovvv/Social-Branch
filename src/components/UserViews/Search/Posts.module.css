@@ -135,6 +135,10 @@
   height: 100px;
   outline: none;
 }
+.comments_ul {
+  overflow: auto;
+  height: 200px;
+}
 @media screen and (max-width: 1540px) {
   .content_post textarea {
     width: 670px;
