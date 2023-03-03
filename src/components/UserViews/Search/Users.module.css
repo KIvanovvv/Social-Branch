@@ -22,3 +22,9 @@
   overflow: auto;
 }
 
+.spinner_container {
+  display: flex;
+  width: 1200px;
+  justify-content: center;
+  align-items: center;
+}

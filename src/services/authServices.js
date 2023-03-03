@@ -225,3 +225,17 @@ export async function getUserById(id) {
     throw new Error(`Something went wrong`);
   }
 }
+
+export async function getUserByQuery(query) {
+  const response = await fetch(`${host}/users/search`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: query,
+    }),
+  });
+  const data = await response.json();
+  return data.reverse();
+}

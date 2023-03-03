@@ -61,7 +61,8 @@ export const SearchBoard = ({ modalVisible, setModalUserId }) => {
             setModalUserId={setModalUserId}
           />
         )}
-        {searchUsers && <Users />}
+        {searchUsers && <Users query={searchQuery}  modalVisible={modalVisible}
+            setModalUserId={setModalUserId}/>}
       </div>
     </div>
   );

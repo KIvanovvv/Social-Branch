@@ -13,11 +13,6 @@
   padding: 10px 10px;
   gap: 10px;
 }
-.user_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .img {
   width: 140px;
