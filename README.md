@@ -50,11 +50,20 @@ You can test the app functionality with the following accounts:
 
 
 **Users:**
-![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Home.PNG?alt=media&token=eb047aa0-9cd4-4654-a225-2eb230937ac5)
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Home.PNG?alt=media&token=9e440dcd-0d5c-4e7a-9b31-0d1db068dde8)
 
-![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Profile.PNG?alt=media&token=e9500cbd-35d1-4494-99ce-a21f817cea81)
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Comments.PNG?alt=media&token=c358c175-3402-4b1c-b853-3b74547bbe2b)
 
-![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/MyPosts.PNG?alt=media&token=26dda9dc-cbb2-4900-bb7b-7fc6e0444f6e)
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Profile.PNG?alt=media&token=1a1fb00d-8a27-42d9-9b7c-2d289e822e7c)
 
-![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Search.PNG?alt=media&token=244da220-6576-43d8-89b4-087e4c98f6cc)
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/MyPosts.PNG?alt=media&token=47df610b-0981-43bd-a89a-abcf7926ed95)
 
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/SearchPosts.PNG?alt=media&token=551f76b2-4255-4c8e-8791-50771a8b6db3)
+
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/SearchUsers.PNG?alt=media&token=ab3bde7e-dcda-4863-b3f4-43b463c01983)
+
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/ViewUserDetails.PNG?alt=media&token=e3fbd0d2-3663-49ea-8c44-44c56fefd7ec)
+
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/MessageUnred.PNG?alt=media&token=b2d7dae4-b6d9-49b2-b56c-8e914dda7226)
+
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/MessageRed.PNG?alt=media&token=c6b5300b-2c25-4805-9304-edc71ba2ede8)
