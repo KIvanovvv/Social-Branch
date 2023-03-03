@@ -13,7 +13,8 @@ This is a personal project, which resembles a social media app. The project is a
 - Changing personal information for the user (Username, Password, Profile image)
 - Adding Bio about the user
 - Mood mechanic which enables the user to set different Images for every mood (Neutral, Happy, Sad, Angry). When a mood is chosen, the user posts and comments are created in the DB with the image set for that mood.
-- Seacrh posts by Username mechanic (working with partial or full username string, case-insensetive)
+- Seacrh for Posts or Users by Username mechanic (working with partial or full username string, case-insensetive)
+- Able to view Users personal information and send them private messages
 
 
 ## Deployment
