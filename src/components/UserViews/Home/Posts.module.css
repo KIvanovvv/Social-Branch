@@ -136,6 +136,12 @@
   height: 200px;
 }
 
+.comment_counter {
+  width: 15px;
+  height: 15px;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 1540px) {
   .content_post textarea {
     width: 580px;

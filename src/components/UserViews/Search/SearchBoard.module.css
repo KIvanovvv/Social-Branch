@@ -90,7 +90,6 @@
 .list li {
   display: flex;
   justify-content: space-between;
-  background-color: green;
 }
 .list p {
   align-self: flex-end;

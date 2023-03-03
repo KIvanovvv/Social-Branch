@@ -64,13 +64,12 @@ export default function List(props) {
         </div>
         <div className={classes.btn_container}>
           <Button onClick={viewComments} className={classes.btn}>
-            Comments
+            Comments <div className={classes.comment_counter}>{comments.length}</div>
           </Button>
         </div>
       </li>
       {commentsVisiable && (
         <div className={classes.comment_section}>
-          
           <>
             {" "}
             <div className={classes.actions}>
