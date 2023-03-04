@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import UserState from "../../state-ctx/userState.js";
 
 const Header = () => {
-  const ctx = useContext(StateContext);
   const { userData: ctxUserData, setUserData: ctxSetUserData } =
     useContext(UserState);
   const navigate = useNavigate();
@@ -15,14 +14,13 @@ const Header = () => {
     ctxSetUserData({});
     sessionStorage.clear();
     navigate("/");
-    ctx.onLogout();
   };
 
   return (
     <div className={classes.header}>
       <div className={classes.name}>
         <h2>Social-Branch</h2>
-        {ctx.hasUserLogged && (
+        {ctxUserData.email && (
           <div className={classes.btns_user}>
             <div className={classes.welcome_user}>
               <p>Welcome {ctxUserData.username}</p>
@@ -51,7 +49,7 @@ const Header = () => {
         )}
       </div>
 
-      {!ctx.hasUserLogged && (
+      {!ctxUserData.email && (
         <div className={classes.btns_guest}>
           <Link to={"/login"} className={classes.login}>
             Login
@@ -61,7 +59,7 @@ const Header = () => {
           </Link>
         </div>
       )}
-      {ctx.hasUserLogged && (
+      {ctxUserData.email && (
         <>
           {" "}
           <Button onClick={onLogoutHandler} className={classes.btn_logout}>

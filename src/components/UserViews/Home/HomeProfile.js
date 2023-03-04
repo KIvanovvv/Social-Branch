@@ -1,51 +1,38 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Button from "../../UI/Button.js";
 import classes from "./HomeProfile.module.css";
 import staticPic from "../../../resources/profilePic.jpg";
 import UserState from "../../../state-ctx/userState.js";
 
 const HomeProfile = () => {
-  const [displayImageChanged, setDisplayImageChanged] = useState(false);
   const { userData: ctxUserData, setUserData: ctxSetUserData } =
     useContext(UserState);
 
   function onNeutralClick() {
-    ctxUserData.displayImage = ctxUserData.imageUrl
+    const displayImage = ctxUserData.imageUrl
       ? ctxUserData.imageUrl
       : staticPic;
-    ctxSetUserData(ctxUserData);
-    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
-    setDisplayImageChanged(true);
+    ctxSetUserData({ ...ctxUserData, displayImage });
   }
   function onHappyClick() {
-    ctxUserData.displayImage = ctxUserData.moods.happy
+    const displayImage = ctxUserData.moods.happy
       ? ctxUserData.moods.happy
       : staticPic;
-    ctxSetUserData(ctxUserData);
-    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
-    setDisplayImageChanged(true);
+    ctxSetUserData({ ...ctxUserData, displayImage });
   }
   function onSadClick() {
-    ctxUserData.displayImage = ctxUserData.moods.sad
+    const displayImage = ctxUserData.moods.sad
       ? ctxUserData.moods.sad
       : staticPic;
-    ctxSetUserData(ctxUserData);
-    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
-    setDisplayImageChanged(true);
+    ctxSetUserData({ ...ctxUserData, displayImage });
   }
   function onAngryClick() {
-    ctxUserData.displayImage = ctxUserData.moods.angry
+    const displayImage = ctxUserData.moods.angry
       ? ctxUserData.moods.angry
       : staticPic;
-    ctxSetUserData(ctxUserData);
-    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
-    setDisplayImageChanged(true);
+    ctxSetUserData({ ...ctxUserData, displayImage });
   }
 
-  useEffect(() => {
-    sessionStorage.setItem("user", JSON.stringify(ctxUserData));
-    setDisplayImageChanged(false);
-  }, [displayImageChanged]);
 
   return (
     <div className={classes.container}>

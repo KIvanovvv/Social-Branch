@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { login } from "../../services/authServices.js";
-import StateContext from "../../state-ctx/state-ctx.js";
 import Background from "../UI/Background.js";
 import Button from "../UI/Button.js";
 import classes from "./LoginForm.module.css";
@@ -9,9 +8,7 @@ import Spinner from "../../resources/Spinner.js";
 import UserState from "../../state-ctx/userState.js";
 const LoginFrom = (props) => {
   const navigate = useNavigate();
-  const { userData: ctxUserData, setUserData: ctxSetUserData } =
-    useContext(UserState);
-
+  const { setUserData: ctxSetUserData } = useContext(UserState);
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isEmailTouched, setIsEmailTouched] = useState(false);
@@ -20,7 +17,6 @@ const LoginFrom = (props) => {
   const [isPasswordTouched, setIsPasswordTouched] = useState(false);
   const [inputsAreInvalid, setInputsAreInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const ctx = useContext(StateContext);
 
   const emailPattern = /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
   let isFormValid = isEmailValid && isPasswordValid;
@@ -65,13 +61,19 @@ const LoginFrom = (props) => {
 
     try {
       setIsLoading(true);
-      const token = await login(email, password);
-      token.displayImage = token.imageUrl;
-      ctxSetUserData(token);
-      sessionStorage.setItem("user", JSON.stringify(token));
+      const user = await login(email, password);
+      user.displayImage = user.imageUrl;
+      ctxSetUserData(user);
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({
+          email: user.email,
+          _id: user._id,
+          accessToken: user.accessToken,
+        })
+      );
       setIsLoading(false);
       navigate("/home");
-      ctx.onHasUserLogged();
     } catch (error) {
       setIsLoading(false);
       setInputsAreInvalid(true);

@@ -3,7 +3,6 @@ import Button from "../UI/Button.js";
 import { register } from "../../services/authServices.js";
 import staticPic from "../../resources/profilePic.jpg";
 import classes from "./RegisterForm.module.css";
-import StateContext from "../../state-ctx/state-ctx.js";
 import Background from "../UI/Background.js";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../resources/Spinner.js";
@@ -21,7 +20,6 @@ const RegisterForm = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const ctx = useContext(StateContext);
   const navigate = useNavigate();
   const { userData: ctxUserData, setUserData: ctxSetUserData } =
     useContext(UserState);
@@ -71,11 +69,17 @@ const RegisterForm = () => {
         throw new Error(`Passwords dont match`);
       }
       setIsLoading(true);
-      const token = await register(email, username, password, imageUrl);
-      token.displayImage = token.imageUrl ? token.imageUrl : staticPic;
-      ctxSetUserData(token);
-      sessionStorage.setItem("user", JSON.stringify(token));
-      ctx.onHasUserLogged();
+      const user = await register(email, username, password, imageUrl);
+      user.displayImage = user.imageUrl ? user.imageUrl : staticPic;
+      ctxSetUserData(user);
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({
+          email: user.email,
+          _id: user._id,
+          accessToken: user.accessToken,
+        })
+      );
       setIsLoading(false);
       navigate("/home");
     } catch (err) {

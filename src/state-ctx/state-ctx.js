@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 const StateContext = React.createContext({
-  hasUserLogged: false,
-  onHasUserLogged: () => {},
-  onLogout: () => {},
+  // hasUserLogged: false,
+  // onHasUserLogged: () => {},
+  // onLogout: () => {},
   currentUser: {},
   setCurrentUser: () => {},
   postUpdated: false,
@@ -11,23 +11,23 @@ const StateContext = React.createContext({
 });
 
 export const StateContextProvider = (props) => {
-  const [hasUserLogged, setHasUserLogged] = useState(false);
+  // const [hasUserLogged, setHasUserLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [postUpdated, setPostUpdated] = useState(false);
 
-  const hasUserLoggedHandler = () => {
-    setHasUserLogged(true);
-  };
-  const userLogoutHandler = () => {
-    sessionStorage.clear();
-    setHasUserLogged(false);
-  };
+  // const hasUserLoggedHandler = () => {
+  //   setHasUserLogged(true);
+  // };
+  // const userLogoutHandler = () => {
+  //   sessionStorage.clear();
+  //   setHasUserLogged(false);
+  // };
   return (
     <StateContext.Provider
       value={{
-        hasUserLogged: hasUserLogged,
-        onHasUserLogged: hasUserLoggedHandler,
-        onLogout: userLogoutHandler,
+        // hasUserLogged: hasUserLogged,
+        // onHasUserLogged: hasUserLoggedHandler,
+        // onLogout: userLogoutHandler,
         currentUser: currentUser,
         setCurrentUser: setCurrentUser,
         postUpdated: postUpdated,
