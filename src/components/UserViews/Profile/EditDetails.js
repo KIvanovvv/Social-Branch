@@ -29,10 +29,14 @@ const EditDetails = () => {
   const [imageAngrySaved, setImageAngrySaved] = useState(false);
 
   async function onAngrySave() {
-    const user = await updateAngry(ctxUserData._id, imageAngryUrl);
+    const user = await updateAngry(
+      ctxUserData._id,
+      imageAngryUrl,
+      ctxUserData.accessToken
+    );
     user.displayImage = ctxUserData.imageUrl;
     setImageAngrySaved(true);
-    ctxSetUserData(user);
+    ctxSetUserData({ ...ctxUserData, ...user });
     setImageAngryUrl("");
   }
 
@@ -44,18 +48,26 @@ const EditDetails = () => {
     setImageSadUrl(e.target.value);
   }
   async function onSadSave() {
-    const user = await updateSad(ctxUserData._id, imageSadUrl);
+    const user = await updateSad(
+      ctxUserData._id,
+      imageSadUrl,
+      ctxUserData.accessToken
+    );
     user.displayImage = ctxUserData.imageUrl;
     setImageSadSaved(true);
-    ctxSetUserData(user);
+    ctxSetUserData({ ...ctxUserData, ...user });
     setImageSadUrl("");
   }
 
   async function onHappySave() {
-    const user = await updateHappy(ctxUserData._id, imageHappyUrl);
+    const user = await updateHappy(
+      ctxUserData._id,
+      imageHappyUrl,
+      ctxUserData.accessToken
+    );
     user.displayImage = ctxUserData.imageUrl;
     setImageHappySaved(true);
-    ctxSetUserData(user);
+    ctxSetUserData({ ...ctxUserData, ...user });
     setImageHappyUrl("");
   }
 
@@ -66,10 +78,14 @@ const EditDetails = () => {
     if (!username.trim()) {
       return;
     }
-    const user = await changeUsernameById(ctxUserData._id, username);
+    const user = await changeUsernameById(
+      ctxUserData._id,
+      username,
+      ctxUserData.accessToken
+    );
     user.displayImage = ctxUserData.displayImage;
     setUsernameSaved(true);
-    ctxSetUserData(user);
+    ctxSetUserData({ ...ctxUserData, ...user });
   }
   function onUsernameChange(e) {
     setUsername(e.target.value);
@@ -83,10 +99,14 @@ const EditDetails = () => {
     if (!imageUrl.trim()) {
       return;
     }
-    const user = await changeImageById(ctxUserData._id, imageUrl);
+    const user = await changeImageById(
+      ctxUserData._id,
+      imageUrl,
+      ctxUserData.accessToken
+    );
     user.displayImage = ctxUserData.imageUrl;
     setImageSaved(true);
-    ctxSetUserData(user);
+    ctxSetUserData({ ...ctxUserData, ...user });
     setImageUrl("");
   }
 
@@ -94,7 +114,11 @@ const EditDetails = () => {
     if (!password.trim()) {
       return;
     }
-    await changePasswordById(ctxUserData._id, password);
+    await changePasswordById(
+      ctxUserData._id,
+      password,
+      ctxUserData.accessToken
+    );
     setPasswordSaved(true);
   }
 

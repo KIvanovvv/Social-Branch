@@ -63,6 +63,7 @@ const LoginFrom = (props) => {
       setIsLoading(true);
       const user = await login(email, password);
       user.displayImage = user.imageUrl;
+      console.log(user);
       ctxSetUserData(user);
       sessionStorage.setItem(
         "user",

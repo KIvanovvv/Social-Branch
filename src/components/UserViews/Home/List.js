@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { createComment, getComments } from "../../../services/postServices.js";
+import UserState from "../../../state-ctx/userState.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 
@@ -10,6 +11,7 @@ export default function List(props) {
   const [content, setContent] = useState("");
   const [comments, setComments] = useState([]);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
+  const { userData: ctxUserData } = useContext(UserState);
 
   function onChangeHandler(e) {
     setContent(e.target.value);
@@ -19,7 +21,7 @@ export default function List(props) {
     if (!content) {
       return;
     }
-    await createComment(content, props.data._id);
+    await createComment(content, props.data._id, ctxUserData);
     setCommentsUpdated(true);
     setContent("");
   }
@@ -64,7 +66,8 @@ export default function List(props) {
         </div>
         <div className={classes.btn_container}>
           <Button onClick={viewComments} className={classes.btn}>
-            Comments <div className={classes.comment_counter}>{comments.length}</div>
+            Comments{" "}
+            <div className={classes.comment_counter}>{comments.length}</div>
           </Button>
         </div>
       </li>

@@ -6,6 +6,7 @@ import {
   updatePostById,
 } from "../../../services/postServices.js";
 import StateContext from "../../../state-ctx/state-ctx.js";
+import UserState from "../../../state-ctx/userState.js";
 import Button from "../../UI/Button.js";
 import classes from "./Posts.module.css";
 
@@ -21,9 +22,10 @@ export default function List(props) {
   const [isPostUpdated, setIsPostUpdated] = useState(false);
   const [isDeleteActive, setIsDeleteActive] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
+  const { userData: ctxUserData } = useContext(UserState);
 
   async function onConfirmDeleteHandler() {
-    await deletePostById(props.data._id);
+    await deletePostById(props.data._id,ctxUserData);
     setIsDeleteActive(false);
     setPostDeleted(true);
     ctx.setPostUpdated(true);
@@ -55,7 +57,7 @@ export default function List(props) {
     async function updatePost() {
       console.log(postContent);
       console.log(props.data._id);
-      await updatePostById(props.data._id, postContent);
+      await updatePostById(props.data._id, postContent, ctxUserData);
       setIsPostUpdated(false);
     }
     if (isPostUpdated) {

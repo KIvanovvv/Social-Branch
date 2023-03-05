@@ -39,7 +39,7 @@ export async function login(email, password) {
         password: password,
       }),
     });
-    if (response.status !== 200) {
+    if (!response.ok) {
       throw new Error();
     }
     const data = await response.json();
@@ -49,14 +49,13 @@ export async function login(email, password) {
   }
 }
 
-export async function changeUsernameById(id, username) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
+export async function changeUsernameById(id, username, token) {
   try {
     const response = await fetch(`${host}/users/change`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "X-Authorization": user.accessToken,
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,
@@ -74,14 +73,13 @@ export async function changeUsernameById(id, username) {
   }
 }
 
-export async function changePasswordById(id, password) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
+export async function changePasswordById(id, password, token) {
   try {
     const response = await fetch(`${host}/users/change/password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "X-Authorization": user.accessToken,
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,
@@ -98,14 +96,13 @@ export async function changePasswordById(id, password) {
   }
 }
 
-export async function changeImageById(id, imageUrl) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
+export async function changeImageById(id, imageUrl, token) {
   try {
     const response = await fetch(`${host}/users/change/image`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "X-Authorization": user.accessToken,
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,
@@ -116,21 +113,20 @@ export async function changeImageById(id, imageUrl) {
       throw new Error();
     }
     const data = await response.json();
-    sessionStorage.setItem("user", JSON.stringify(data));
+
     return data;
   } catch (error) {
     throw new Error();
   }
 }
 
-export async function changeDescriptionById(id, description) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
+export async function changeDescriptionById(id, description, token) {
   try {
     const response = await fetch(`${host}/users/change/description`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "X-Authorization": user.accessToken,
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,
@@ -147,12 +143,13 @@ export async function changeDescriptionById(id, description) {
   }
 }
 
-export async function updateHappy(id, imageUrl) {
+export async function updateHappy(id, imageUrl, token) {
   try {
     const response = await fetch(`${host}/users/moods/happy`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,
@@ -169,12 +166,13 @@ export async function updateHappy(id, imageUrl) {
   }
 }
 
-export async function updateSad(id, imageUrl) {
+export async function updateSad(id, imageUrl, token) {
   try {
     const response = await fetch(`${host}/users/moods/sad`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,
@@ -191,12 +189,13 @@ export async function updateSad(id, imageUrl) {
   }
 }
 
-export async function updateAngry(id, imageUrl) {
+export async function updateAngry(id, imageUrl, token) {
   try {
     const response = await fetch(`${host}/users/moods/angry`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Authorization": token,
       },
       body: JSON.stringify({
         _id: id,

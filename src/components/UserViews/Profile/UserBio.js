@@ -15,8 +15,12 @@ const UserBio = () => {
   }
 
   async function onSaveHandler() {
-    const user = await changeDescriptionById(ctxUserData._id, bio);
-    ctxSetUserData(user);
+    const user = await changeDescriptionById(
+      ctxUserData._id,
+      bio,
+      ctxUserData.accessToken
+    );
+    ctxSetUserData({ ...ctxUserData, ...user });
     setBioSaved(true);
   }
 

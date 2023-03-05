@@ -1,13 +1,6 @@
 import Button from "../../UI/Button.js";
 import classes from "./UserList.module.css";
-
-// const user = {
-//   username: "Mike",
-//   description: "Hello Im Mike",
-//   email: "mike@abv.bg",
-//   imageUrl:
-//     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb4hRG8aYmHy31bMIEh0LUtwv8Ie8GEvxlng&usqp=CAU",
-// };
+import staticPic from "../../../resources/profilePic.jpg";
 
 const UserList = ({ user, modalVisible, setModalUserId }) => {
   function ProfileClickHandler(id) {
@@ -19,7 +12,7 @@ const UserList = ({ user, modalVisible, setModalUserId }) => {
       <div
         className={classes.img}
         style={{
-          backgroundImage: `url(${user.imageUrl})`,
+          backgroundImage: `url(${user.imageUrl || staticPic})`,
         }}
       />
       <p className={classes.username}>{user.username}</p>

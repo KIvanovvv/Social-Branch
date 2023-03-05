@@ -5,13 +5,15 @@ export async function sendMessage(
   reciverId,
   senderId,
   senderImage,
-  senderUsername
+  senderUsername,
+  accessToken
 ) {
   try {
     const response = await fetch(`${host}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Authorization": accessToken,
       },
       body: JSON.stringify({
         content,
@@ -38,12 +40,13 @@ export async function getMessagesByUserId(userId) {
   }
 }
 
-export async function viewMessage(msgId) {
+export async function viewMessage(msgId, user) {
   try {
     const response = await fetch(`${host}/messages/viewed`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Authorization": user.accessToken,
       },
       body: JSON.stringify({
         msgId,

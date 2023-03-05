@@ -6,6 +6,7 @@ export async function createPost(content, user) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-authorization": user.accessToken,
       },
       body: JSON.stringify({
         content: content,
@@ -27,13 +28,12 @@ export async function getAllPosts() {
   return data.reverse();
 }
 
-export async function createComment(content, postId) {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+export async function createComment(content, postId, user) {
   const response = await fetch(`${host}/posts/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "X-Authorization": user.accessToken,
+      "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       content: content,
@@ -58,13 +58,12 @@ export async function getUserPosts(id) {
   return data.reverse();
 }
 
-export async function updatePostById(id, content) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
+export async function updatePostById(id, content, user) {
   const response = await fetch(`${host}/posts/update`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "X-Authorization": user.accessToken,
+      "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       content: content,
@@ -75,13 +74,12 @@ export async function updatePostById(id, content) {
   return data;
 }
 
-export async function deletePostById(id) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
+export async function deletePostById(id, user) {
   const response = await fetch(`${host}/posts/delete`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      // "X-Authorization": user.accessToken,
+      "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       _id: id,
@@ -92,12 +90,10 @@ export async function deletePostById(id) {
 }
 
 export async function getPostsByQuery(query) {
-  // const user = JSON.parse(sessionStorage.getItem("user"));
   const response = await fetch(`${host}/posts/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // "X-Authorization": user.accessToken,
     },
     body: JSON.stringify({
       query: query,

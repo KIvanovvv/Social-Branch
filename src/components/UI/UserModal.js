@@ -4,13 +4,14 @@ import { sendMessage } from "../../services/messageService.js";
 import UserState from "../../state-ctx/userState.js";
 import Button from "./Button.js";
 import classes from "./UserModal.module.css";
+import staticPic from "../../resources/profilePic.jpg";
 
 const UserModal = ({ modalLoading, user }) => {
   const [sendMessageVisible, setSendMessageVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const { userData: ctxUserData } = useContext(UserState);
-
+  console.log(ctxUserData);
   function sendMessageHandler() {
     setSendMessageVisible((curr) => !curr);
   }
@@ -24,8 +25,9 @@ const UserModal = ({ modalLoading, user }) => {
       message,
       user._id,
       ctxUserData._id,
-      ctxUserData.imageUrl,
-      ctxUserData.username
+      ctxUserData.imageUrl || staticPic,
+      ctxUserData.username,
+      ctxUserData.accessToken
     );
     setIsSending(false);
     setMessage("");
@@ -45,7 +47,7 @@ const UserModal = ({ modalLoading, user }) => {
                 {" "}
                 <div
                   style={{
-                    backgroundImage: `url(${user.imageUrl})`,
+                    backgroundImage: `url(${user.imageUrl || staticPic})`,
                   }}
                   className={classes.img}
                 ></div>
