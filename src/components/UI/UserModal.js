@@ -11,7 +11,7 @@ const UserModal = ({ modalLoading, user }) => {
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const { userData: ctxUserData } = useContext(UserState);
-  console.log(ctxUserData);
+
   function sendMessageHandler() {
     setSendMessageVisible((curr) => !curr);
   }

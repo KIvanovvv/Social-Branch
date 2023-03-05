@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import UserState from "../../state-ctx/userState.js";
 
-const AuthGuard = () => {
+const PublicGuard = () => {
   const { userData } = useContext(UserState);
 
-  if (!userData.accessToken) {
-    return <Navigate to={"/login"} replace />;
+  if (userData.accessToken) {
+    return <Navigate to={"/home"} replace />;
   }
 
   return <Outlet />;
 };
 
-export default AuthGuard;
+export default PublicGuard;
