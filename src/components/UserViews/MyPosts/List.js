@@ -7,7 +7,7 @@ import {
 } from "../../../services/postServices.js";
 import StateContext from "../../../state-ctx/state-ctx.js";
 import UserState from "../../../state-ctx/userState.js";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./Posts.module.css";
 
 export default function List(props) {
@@ -25,7 +25,7 @@ export default function List(props) {
   const { userData: ctxUserData } = useContext(UserState);
 
   async function onConfirmDeleteHandler() {
-    await deletePostById(props.data._id,ctxUserData);
+    await deletePostById(props.data._id, ctxUserData);
     setIsDeleteActive(false);
     setPostDeleted(true);
     ctx.setPostUpdated(true);

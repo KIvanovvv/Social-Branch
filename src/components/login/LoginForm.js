@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { login } from "../../services/authServices.js";
-import Background from "../UI/Background.js";
-import Button from "../UI/Button.js";
+import Background from "../Utils/Background.js";
+import Button from "../Utils/Button.js";
 import classes from "./LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../resources/Spinner.js";

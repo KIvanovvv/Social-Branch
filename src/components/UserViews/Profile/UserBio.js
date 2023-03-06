@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { changeDescriptionById } from "../../../services/authServices.js";
 import UserState from "../../../state-ctx/userState.js";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./UserBio.module.css";
 
 const UserBio = () => {

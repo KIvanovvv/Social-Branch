@@ -1,4 +1,4 @@
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./UserList.module.css";
 import staticPic from "../../../resources/profilePic.jpg";
 

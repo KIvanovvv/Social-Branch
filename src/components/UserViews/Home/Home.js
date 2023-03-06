@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUserById } from "../../../services/authServices.js";
-import Background from "../../UI/Background.js";
-import UserModal from "../../UI/UserModal.js";
+import Background from "../../Utils/Background.js";
+import UserModal from "../../Utils/UserModal.js";
 import classes from "./Home.module.css";
 import HomeProfile from "./HomeProfile.js";
 import PostBoard from "./PostBoard.js";

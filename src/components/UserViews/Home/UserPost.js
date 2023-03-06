@@ -3,7 +3,7 @@ import Spinner from "../../../resources/Spinner.js";
 import { createPost } from "../../../services/postServices.js";
 import StateContext from "../../../state-ctx/state-ctx.js";
 import UserState from "../../../state-ctx/userState.js";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./UserPost.module.css";
 const UserPost = () => {
   const ctx = useContext(StateContext);

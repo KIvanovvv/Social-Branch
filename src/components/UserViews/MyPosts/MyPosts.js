@@ -1,5 +1,5 @@
 import UserState from "../../../state-ctx/userState.js";
-import Background from "../../UI/Background.js";
+import Background from "../../Utils/Background.js";
 import classes from "./MyPosts.module.css";
 import PostBoard from "./PostBoard.js";
 

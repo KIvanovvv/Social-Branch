@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { createComment, getComments } from "../../../services/postServices.js";
 import UserState from "../../../state-ctx/userState.js";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./Posts.module.css";
 
 export default function List(props) {

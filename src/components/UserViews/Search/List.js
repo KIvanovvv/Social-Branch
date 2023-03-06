@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createComment, getComments } from "../../../services/postServices.js";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./Posts.module.css";
 
 export default function List(props) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Background from "../../UI/Background.js";
+import Background from "../../Utils/Background.js";
 import EditDetails from "./EditDetails.js";
 
 import classes from "./Profile.module.css";

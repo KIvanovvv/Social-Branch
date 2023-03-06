@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./HomeProfile.module.css";
 import staticPic from "../../../resources/profilePic.jpg";
 import UserState from "../../../state-ctx/userState.js";
@@ -32,7 +32,6 @@ const HomeProfile = () => {
       : staticPic;
     ctxSetUserData({ ...ctxUserData, displayImage });
   }
-
 
   return (
     <div className={classes.container}>

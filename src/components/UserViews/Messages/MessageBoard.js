@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { getMessagesByUserId } from "../../../services/messageService.js";
 import UserState from "../../../state-ctx/userState.js";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import classes from "./MessageBoard.module.css";
 import MessageList from "./MessageList.js";
 

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import Button from "../UI/Button.js";
+import Button from "../Utils/Button.js";
 import { register } from "../../services/authServices.js";
 import staticPic from "../../resources/profilePic.jpg";
 import classes from "./RegisterForm.module.css";
-import Background from "../UI/Background.js";
+import Background from "../Utils/Background.js";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../resources/Spinner.js";
 import UserState from "../../state-ctx/userState.js";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../UI/Button.js";
+import Button from "../../Utils/Button.js";
 import Posts from "./Posts.js";
 import classes from "./SearchBoard.module.css";
 import Users from "./Users.js";
@@ -61,8 +61,13 @@ export const SearchBoard = ({ modalVisible, setModalUserId }) => {
             setModalUserId={setModalUserId}
           />
         )}
-        {searchUsers && <Users query={searchQuery}  modalVisible={modalVisible}
-            setModalUserId={setModalUserId}/>}
+        {searchUsers && (
+          <Users
+            query={searchQuery}
+            modalVisible={modalVisible}
+            setModalUserId={setModalUserId}
+          />
+        )}
       </div>
     </div>
   );
