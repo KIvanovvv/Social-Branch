@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Social-Branch---React-Project/static/css/main.bed3e3f5.css",
-    "main.js": "/Social-Branch---React-Project/static/js/main.74c0e828.js",
+    "main.js": "/Social-Branch---React-Project/static/js/main.80a9b646.js",
     "static/js/787.514edfe9.chunk.js": "/Social-Branch---React-Project/static/js/787.514edfe9.chunk.js",
     "static/media/friends.jpg": "/Social-Branch---React-Project/static/media/friends.8cd296c6a30b87fb653a.jpg",
     "index.html": "/Social-Branch---React-Project/index.html",
     "main.bed3e3f5.css.map": "/Social-Branch---React-Project/static/css/main.bed3e3f5.css.map",
-    "main.74c0e828.js.map": "/Social-Branch---React-Project/static/js/main.74c0e828.js.map",
+    "main.80a9b646.js.map": "/Social-Branch---React-Project/static/js/main.80a9b646.js.map",
     "787.514edfe9.chunk.js.map": "/Social-Branch---React-Project/static/js/787.514edfe9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bed3e3f5.css",
-    "static/js/main.74c0e828.js"
+    "static/js/main.80a9b646.js"
   ]
 }
