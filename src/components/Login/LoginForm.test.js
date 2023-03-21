@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import LoginForm from "./LoginForm.js";
 
 describe(`for Login page`, () => {
-  test(`Is Login page visible`, () => {
+  test(`is Login page visible`, () => {
     render(
       <BrowserRouter>
         <LoginForm />
@@ -61,8 +61,3 @@ describe(`for Login page`, () => {
     expect(errorElement).toBeInTheDocument();
   });
 });
-
-// window.fetch = jest.fn()
-// window.fetch.mockResolvedValueOnce({
-//   json:async()=>[{}]
-// })

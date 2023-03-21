@@ -17,16 +17,19 @@ const RegisterForm = () => {
   const [passwordIsValid, setPasswordIsValid] = useState(false);
   const [repass, setRepass] = useState("");
   const [repassIsValid, setRepassIsValid] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+  const [isEmailTouched, setIsEmailTouched] = useState(false);
+  const [isPasswordTouched, setIsPasswordTouched] = useState(false);
+  const [isUsernameTouched, setIsUsernameTouched] = useState(false);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { userData: ctxUserData, setUserData: ctxSetUserData } =
-    useContext(UserState);
+  const { setUserData: ctxSetUserData } = useContext(UserState);
+
+  const emailPattern = /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
   let isFormValid = false;
   useEffect(() => {
-    if (email.trim().includes("@")) {
+    if (email.match(emailPattern)) {
       setEmailIsValid(true);
     }
     if (username.trim().length > 2) {
@@ -45,19 +48,20 @@ const RegisterForm = () => {
 
   const emailOnChangeHandler = (e) => {
     setEmail(e.target.value);
+    setIsEmailTouched(false);
   };
   const usernameOnChangeHandler = (e) => {
     setUsername(e.target.value);
+    setIsUsernameTouched(false);
   };
   const passwordOnChangeHandler = (e) => {
     setPassword(e.target.value);
+    setIsPasswordTouched(false);
   };
   const repassOnChangeHandler = (e) => {
     setRepass(e.target.value);
   };
-  const imageOnChangeHandler = (e) => {
-    setImageUrl(e.target.value);
-  };
+
   const onSignupHandler = async (e) => {
     e.preventDefault();
     if (!isFormValid) {
@@ -69,8 +73,8 @@ const RegisterForm = () => {
         throw new Error(`Passwords dont match`);
       }
       setIsLoading(true);
-      const user = await register(email, username, password, imageUrl);
-      user.displayImage = user.imageUrl ? user.imageUrl : staticPic;
+      const user = await register(email, username, password);
+      user.displayImage = staticPic;
       ctxSetUserData(user);
       sessionStorage.setItem(
         "user",
@@ -88,6 +92,18 @@ const RegisterForm = () => {
       console.log(error);
     }
   };
+
+  const inputClasses = {
+    email: `${classes.email} ${
+      !emailIsValid && isEmailTouched && classes.invalid
+    }`,
+    password: `${classes.password} ${
+      !passwordIsValid && isPasswordTouched && classes.invalid
+    }`,
+    username: `${classes.username} ${
+      !usernameIsValid && isUsernameTouched && classes.invalid
+    }`,
+  };
   return (
     <>
       <Background />
@@ -96,56 +112,69 @@ const RegisterForm = () => {
           <h3 className={classes.header}>Create new account</h3>
         </div>
         <div>
-          {error && <p className={classes.error}>{error}</p>}
+          {error && <p className={classes.error_text}>{error}</p>}
           <form onSubmit={onSignupHandler} className={classes.inputs}>
+            {!emailIsValid && isEmailTouched && (
+              <p className={classes.error_text}>Please enter a valid email !</p>
+            )}
             <div className={classes.input_field}>
               {"*"}
+
               <input
-                className={classes.username}
+                className={inputClasses.email}
                 type="text"
                 placeholder="Email"
                 onChange={emailOnChangeHandler}
+                onBlur={() => setIsEmailTouched(true)}
               />
             </div>
+            {!usernameIsValid && isUsernameTouched && (
+              <p className={classes.error_text}>
+                Username must be at least 3 characters !
+              </p>
+            )}
             <div className={classes.input_field}>
               {"*"}
               <input
-                className={classes.username}
+                className={inputClasses.username}
                 type="text"
                 placeholder="Username"
                 onChange={usernameOnChangeHandler}
+                onBlur={() => setIsUsernameTouched(true)}
               />
             </div>
+            {!passwordIsValid && isPasswordTouched && (
+              <p className={classes.error_text}>
+                Password must be at least 8 symbols !
+              </p>
+            )}
             <div className={classes.input_field}>
               {"*"}
               <input
-                className={classes.password}
+                className={inputClasses.password}
                 type="password"
                 placeholder="Password"
                 onChange={passwordOnChangeHandler}
+                onBlur={() => setIsPasswordTouched(true)}
               />
             </div>
+
             <div className={classes.input_field}>
               {"*"}
               <input
-                className={classes.password}
+                className={inputClasses.password}
                 type="password"
                 placeholder="Repeat password"
                 onChange={repassOnChangeHandler}
               />
             </div>
-            <input
-              className={classes.image}
-              type="text"
-              placeholder="Image URL"
-              onChange={imageOnChangeHandler}
-            />
+
             <Button
               className={classes.btn}
               type="submit"
               disabled={isLoading ? true : false}
             >
-              {isLoading ? <Spinner w={15} h={17} /> : "Sign up"}
+              {isLoading ? <Spinner w={15} h={15} /> : "Sign up"}
             </Button>
           </form>
         </div>

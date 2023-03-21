@@ -43,6 +43,7 @@
 .error_text {
   color: rgb(246, 52, 52);
   font-size: 16px;
+  margin: 0;
 }
 
 .invalid {
