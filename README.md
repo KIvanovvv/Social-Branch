@@ -8,7 +8,7 @@ This is a personal project, which resembles a social media app. The project is a
 ## Features
 
 - Login/Register
-- Create,Update and Delete personal posts for Logged in users
+- Create,Read,Update and Delete personal posts for Logged in users
 - Reading and Creating comments on selected posts for Logged in users
 - Changing personal information for the user (Username, Password, Profile image)
 - Adding Bio about the user
@@ -54,7 +54,7 @@ You can test the app functionality with the following accounts:
 
 ![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Comments.PNG?alt=media&token=c358c175-3402-4b1c-b853-3b74547bbe2b)
 
-![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Profile.PNG?alt=media&token=1a1fb00d-8a27-42d9-9b7c-2d289e822e7c)
+![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/Profile.PNG?alt=media&token=9d27e13f-8554-4e6c-9bb2-1e9900c0250e)
 
 ![App Screenshot](https://firebasestorage.googleapis.com/v0/b/social-branch.appspot.com/o/MyPosts.PNG?alt=media&token=47df610b-0981-43bd-a89a-abcf7926ed95)
 
