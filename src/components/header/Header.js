@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import StateContext from "../../state-ctx/state-ctx.js";
 import Button from "../Utils/Button.js";
 import classes from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";

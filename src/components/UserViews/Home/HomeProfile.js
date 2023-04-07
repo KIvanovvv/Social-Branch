@@ -38,6 +38,7 @@ const HomeProfile = () => {
       <div className={classes.wrapper}>
         <div
           className={classes.profile_img}
+          data-testid="profile_img"
           style={{
             backgroundImage: `url(${
               ctxUserData.displayImage

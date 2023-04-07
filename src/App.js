@@ -9,10 +9,10 @@ import Profile from "./components/UserViews/Profile/Profile.js";
 import MyPosts from "./components/UserViews/MyPosts/MyPosts.js";
 import Search from "./components/UserViews/Search/Search.js";
 import { Routes, Route } from "react-router-dom";
-import UserState from "./state-ctx/userState.js";
 import Messages from "./components/UserViews/Messages/Messages.js";
-import AuthGuard from "./components/middleware/AuthGuard.js";
-import PublicGuard from "./components/middleware/PublicGuard.js";
+import AuthGuard from "./components/routeGuards/AuthGuard.js";
+import PublicGuard from "./components/routeGuards/PublicGuard.js";
+import UserState from "./state-ctx/userState.js";
 
 function App() {
   const [userData, setUserData] = useState({});
