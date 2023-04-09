@@ -93,7 +93,7 @@ const EditDetails = () => {
   }, [imageUrl]);
 
   async function onPasswordSave() {
-    if (!password.trim()) {
+    if (!password.trim() || password.length < 8) {
       return;
     }
     await changePasswordById(

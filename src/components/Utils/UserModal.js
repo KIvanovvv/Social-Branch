@@ -20,6 +20,9 @@ const UserModal = ({ modalLoading, user }) => {
     setMessage(e.target.value);
   }
   async function onSendHandler() {
+    if (!message.trim()) {
+      return;
+    }
     setIsSending(true);
     await sendMessage(
       message,
