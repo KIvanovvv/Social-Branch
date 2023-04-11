@@ -27,7 +27,7 @@ Link to the deployed project  https://kivanovvv.github.io/Social-Branch---React-
 ## Tech Stack
 
 
-**Front-End:** React, CSS
+**Front-End:** React, CSS, Redux
 
 **Back-End:**  Express, MongoDB, Mongoose, JWT, Bcrypt
 
