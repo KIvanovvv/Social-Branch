@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./EditDetails.module.css";
 import Button from "../../Utils/Button.js";
 import {
@@ -10,54 +10,55 @@ import {
   updateSad,
 } from "../../../services/authServices.js";
 import staticPic from "../../../resources/profilePic.jpg";
-import UserState from "../../../state-ctx/userState.js";
 import UploadComponent from "../../Utils/UploadComponent.js";
+import { useDispatch, useSelector } from "react-redux";
+import { userActions } from "../../../store/index.js";
 
 const EditDetails = () => {
-  const { userData: ctxUserData, setUserData: ctxSetUserData } =
-    useContext(UserState);
-  const [username, setUsername] = useState(ctxUserData.username);
+  const userData = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState(userData.username);
   const [usernameSaved, setUsernameSaved] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordSaved, setPasswordSaved] = useState(false);
-  const [imageUrl, setImageUrl] = useState(ctxUserData.imageUrl);
-  const [imageHappyUrl, setImageHappyUrl] = useState(ctxUserData.moods?.happy);
-  const [imageSadUrl, setImageSadUrl] = useState(ctxUserData.moods?.sad);
-  const [imageAngryUrl, setImageAngryUrl] = useState(ctxUserData.moods?.angry);
+  const [imageUrl, setImageUrl] = useState(userData.imageUrl);
+  const [imageHappyUrl, setImageHappyUrl] = useState(userData.moods?.happy);
+  const [imageSadUrl, setImageSadUrl] = useState(userData.moods?.sad);
+  const [imageAngryUrl, setImageAngryUrl] = useState(userData.moods?.angry);
 
   useEffect(() => {
     (async function onAngrySave() {
       const user = await updateAngry(
-        ctxUserData._id,
+        userData._id,
         imageAngryUrl,
-        ctxUserData.accessToken
+        userData.accessToken
       );
-      user.displayImage = ctxUserData.imageUrl;
-      ctxSetUserData({ ...ctxUserData, ...user });
+      user.displayImage = userData.imageUrl;
+      dispatch(userActions.setUserData({ ...userData, ...user }));
     })();
   }, [imageAngryUrl]);
 
   useEffect(() => {
     (async function onSadSave() {
       const user = await updateSad(
-        ctxUserData._id,
+        userData._id,
         imageSadUrl,
-        ctxUserData.accessToken
+        userData.accessToken
       );
-      user.displayImage = ctxUserData.imageUrl;
-      ctxSetUserData({ ...ctxUserData, ...user });
+      user.displayImage = userData.imageUrl;
+      dispatch(userActions.setUserData({ ...userData, ...user }));
     })();
   }, [imageSadUrl]);
 
   useEffect(() => {
     (async function onHappySave() {
       const user = await updateHappy(
-        ctxUserData._id,
+        userData._id,
         imageHappyUrl,
-        ctxUserData.accessToken
+        userData.accessToken
       );
-      user.displayImage = ctxUserData.imageUrl;
-      ctxSetUserData({ ...ctxUserData, ...user });
+      user.displayImage = userData.imageUrl;
+      dispatch(userActions.setUserData({ ...userData, ...user }));
     })();
   }, [imageHappyUrl]);
   async function onUsernameSave() {
@@ -65,13 +66,13 @@ const EditDetails = () => {
       return;
     }
     const user = await changeUsernameById(
-      ctxUserData._id,
+      userData._id,
       username,
-      ctxUserData.accessToken
+      userData.accessToken
     );
-    user.displayImage = ctxUserData.displayImage;
+    user.displayImage = userData.displayImage;
     setUsernameSaved(true);
-    ctxSetUserData({ ...ctxUserData, ...user });
+    dispatch(userActions.setUserData({ ...userData, ...user }));
   }
   function onUsernameChange(e) {
     setUsername(e.target.value);
@@ -83,12 +84,12 @@ const EditDetails = () => {
         return;
       }
       const user = await changeImageById(
-        ctxUserData._id,
+        userData._id,
         imageUrl,
-        ctxUserData.accessToken
+        userData.accessToken
       );
-      user.displayImage = ctxUserData.imageUrl;
-      ctxSetUserData({ ...ctxUserData, ...user });
+      user.displayImage = userData.imageUrl;
+      dispatch(userActions.setUserData({ ...userData, ...user }));
     })();
   }, [imageUrl]);
 
@@ -96,11 +97,7 @@ const EditDetails = () => {
     if (!password.trim() || password.length < 8) {
       return;
     }
-    await changePasswordById(
-      ctxUserData._id,
-      password,
-      ctxUserData.accessToken
-    );
+    await changePasswordById(userData._id, password, userData.accessToken);
     setPasswordSaved(true);
   }
 
@@ -162,7 +159,7 @@ const EditDetails = () => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        ctxUserData.imageUrl ? ctxUserData.imageUrl : staticPic
+                        userData.imageUrl ? userData.imageUrl : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -171,20 +168,6 @@ const EditDetails = () => {
                 <div className={classes.mood_text_neutral}>Neutral</div>
                 <div className={classes.list_bottom}>
                   <UploadComponent setImage={setImageUrl} />
-                  {/* <input
-                    type="text"
-                    placeholder="Image url..."
-                    className={classes.img_input}
-                    onChange={onImageChange}
-                    value={imageUrl}
-                  />
-                  <Button
-                    onClick={onImageSave}
-                    className={imageSaved ? classes.saved : ""}
-                    disabled={imageSaved ? true : false}
-                  >
-                    {imageSaved ? "Saved" : "Save"}
-                  </Button> */}
                 </div>
               </div>
               <div className={classes.img_card}>
@@ -192,9 +175,7 @@ const EditDetails = () => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        ctxUserData.moods.happy
-                          ? ctxUserData.moods.happy
-                          : staticPic
+                        userData.moods.happy ? userData.moods.happy : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -203,20 +184,6 @@ const EditDetails = () => {
                 <div className={classes.mood_text_happy}>Happy</div>
                 <div className={classes.list_bottom}>
                   <UploadComponent setImage={setImageHappyUrl} />
-                  {/* <input
-                    type="text"
-                    placeholder="Image url..."
-                    className={classes.img_input}
-                    onChange={onChangeHappy}
-                    value={imageHappyUrl}
-                  />
-                  <Button
-                    onClick={onHappySave}
-                    className={imageHappySaved ? classes.saved : ""}
-                    disabled={imageHappySaved ? true : false}
-                  >
-                    {imageHappySaved ? "Saved" : "Save"}
-                  </Button> */}
                 </div>
               </div>
               <div className={classes.img_card}>
@@ -224,9 +191,7 @@ const EditDetails = () => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        ctxUserData.moods.sad
-                          ? ctxUserData.moods.sad
-                          : staticPic
+                        userData.moods.sad ? userData.moods.sad : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -235,20 +200,6 @@ const EditDetails = () => {
                 <div className={classes.mood_text_sad}>Sad</div>
                 <div className={classes.list_bottom}>
                   <UploadComponent setImage={setImageSadUrl} />
-                  {/* <input
-                    type="text"
-                    placeholder="Image url..."
-                    className={classes.img_input}
-                    onChange={onChangeSad}
-                    value={imageSadUrl}
-                  />
-                  <Button
-                    onClick={onSadSave}
-                    className={imageSadSaved ? classes.saved : ""}
-                    disabled={imageSadSaved ? true : false}
-                  >
-                    {imageSadSaved ? "Saved" : "Save"}
-                  </Button> */}
                 </div>
               </div>
               <div className={classes.img_card}>
@@ -256,9 +207,7 @@ const EditDetails = () => {
                   <div
                     style={{
                       backgroundImage: `url(${
-                        ctxUserData.moods.angry
-                          ? ctxUserData.moods.angry
-                          : staticPic
+                        userData.moods.angry ? userData.moods.angry : staticPic
                       })`,
                     }}
                     className={classes.img}
@@ -267,20 +216,6 @@ const EditDetails = () => {
                 <div className={classes.mood_text_angry}>Angry</div>
                 <div className={classes.list_bottom}>
                   <UploadComponent setImage={setImageAngryUrl} />
-                  {/* <input
-                    type="text"
-                    placeholder="Image url..."
-                    className={classes.img_input}
-                    onChange={onChangeAngry}
-                    value={imageAngryUrl}
-                  />
-                  <Button
-                    onClick={onAngrySave}
-                    className={imageAngrySaved ? classes.saved : ""}
-                    disabled={imageAngrySaved ? true : false}
-                  >
-                    {imageAngrySaved ? "Saved" : "Save"}
-                  </Button> */}
                 </div>
               </div>
             </div>

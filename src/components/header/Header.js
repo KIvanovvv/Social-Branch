@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
 import Button from "../Utils/Button.js";
 import classes from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import UserState from "../../state-ctx/userState.js";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../store/index.js";
 
 const Header = () => {
-  const { userData: ctxUserData, setUserData: ctxSetUserData } =
-    useContext(UserState);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
   const navigate = useNavigate();
 
   const onLogoutHandler = () => {
-    ctxSetUserData({});
+    dispatch(userActions.setUserData({}));
     sessionStorage.clear();
     navigate("/");
   };
@@ -19,10 +19,10 @@ const Header = () => {
     <div className={classes.header}>
       <div className={classes.name}>
         <h2>Social-Branch</h2>
-        {ctxUserData.email && (
+        {userData.email && (
           <div className={classes.btns_user}>
             <div className={classes.welcome_user}>
-              <p>Welcome {ctxUserData.username}</p>
+              <p>Welcome {userData.username}</p>
             </div>
             <Link className={classes.btn_home} to="/home">
               Home
@@ -38,17 +38,12 @@ const Header = () => {
             </Link>
             <Link className={classes.btn_message} to="/messages">
               Messages{" "}
-              {/* <div
-                className={
-                  hasNewMsg ? classes.message_dot_new : classes.message_dot_old
-                }
-              ></div> */}
             </Link>
           </div>
         )}
       </div>
 
-      {!ctxUserData.email && (
+      {!userData.email && (
         <div className={classes.btns_guest}>
           <Link to={"/login"} className={classes.login}>
             Login
@@ -58,7 +53,7 @@ const Header = () => {
           </Link>
         </div>
       )}
-      {ctxUserData.email && (
+      {userData.email && (
         <>
           {" "}
           <Button onClick={onLogoutHandler} className={classes.btn_logout}>

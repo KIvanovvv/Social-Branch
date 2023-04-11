@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { getUserPosts } from "../../../services/postServices.js";
-import StateContext from "../../../state-ctx/state-ctx.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
-import UserState from "../../../state-ctx/userState.js";
+import { useSelector } from "react-redux";
 const Posts = () => {
-  const ctx = useContext(StateContext);
-  const { userData } = useContext(UserState);
+  const userPostsUpdated = useSelector((state) => state.user.userPostsUpdated);
+  const userData = useSelector((state) => state.user.userData);
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -20,8 +19,7 @@ const Posts = () => {
       setPosts(postsData);
     };
     fetchPosts();
-    ctx.setPostUpdated(false);
-  }, [ctx.postUpdated, ctx, userData]);
+  }, [userPostsUpdated]);
   if (!hasLoaded && isLoading) {
     return (
       <div className={classes.spinner_container}>

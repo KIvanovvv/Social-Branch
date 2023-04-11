@@ -1,36 +1,32 @@
-import { useContext } from "react";
 import Button from "../../Utils/Button.js";
 import classes from "./HomeProfile.module.css";
 import staticPic from "../../../resources/profilePic.jpg";
-import UserState from "../../../state-ctx/userState.js";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../../store/index.js";
 
 const HomeProfile = () => {
-  const { userData: ctxUserData, setUserData: ctxSetUserData } =
-    useContext(UserState);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
 
   function onNeutralClick() {
-    const displayImage = ctxUserData.imageUrl
-      ? ctxUserData.imageUrl
-      : staticPic;
-    ctxSetUserData({ ...ctxUserData, displayImage });
+    const displayImage = userData.imageUrl ? userData.imageUrl : staticPic;
+    dispatch(userActions.setImageNeutral(displayImage));
   }
   function onHappyClick() {
-    const displayImage = ctxUserData.moods.happy
-      ? ctxUserData.moods.happy
+    const displayImage = userData.moods.happy
+      ? userData.moods.happy
       : staticPic;
-    ctxSetUserData({ ...ctxUserData, displayImage });
+    dispatch(userActions.setImageHappy(displayImage));
   }
   function onSadClick() {
-    const displayImage = ctxUserData.moods.sad
-      ? ctxUserData.moods.sad
-      : staticPic;
-    ctxSetUserData({ ...ctxUserData, displayImage });
+    const displayImage = userData.moods.sad ? userData.moods.sad : staticPic;
+    dispatch(userActions.setImageSad(displayImage));
   }
   function onAngryClick() {
-    const displayImage = ctxUserData.moods.angry
-      ? ctxUserData.moods.angry
+    const displayImage = userData.moods.angry
+      ? userData.moods.angry
       : staticPic;
-    ctxSetUserData({ ...ctxUserData, displayImage });
+    dispatch(userActions.setImageAngry(displayImage));
   }
 
   return (
@@ -41,9 +37,9 @@ const HomeProfile = () => {
           data-testid="profile_img"
           style={{
             backgroundImage: `url(${
-              ctxUserData.displayImage
-                ? ctxUserData.displayImage
-                : ctxUserData.imageUrl || staticPic
+              userData.displayImage
+                ? userData.displayImage
+                : userData.imageUrl || staticPic
             })`,
           }}
         ></div>

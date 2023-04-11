@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { getAllPosts } from "../../../services/postServices.js";
-import StateContext from "../../../state-ctx/state-ctx.js";
 import List from "./List.js";
 import classes from "./Posts.module.css";
+import { useSelector } from "react-redux";
 const Posts = ({ modalVisible, setModalUserId }) => {
-  const ctx = useContext(StateContext);
+  const userPostsUpdated = useSelector(state=>state.user.userPostsUpdated)
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -18,8 +18,7 @@ const Posts = ({ modalVisible, setModalUserId }) => {
       setPosts(postsData);
     };
     fetchPosts();
-    ctx.setPostUpdated(false);
-  }, [ctx.postUpdated, ctx]);
+  }, [userPostsUpdated]);
   if (!hasLoaded && isLoading) {
     return (
       <div className={classes.spinner_container}>

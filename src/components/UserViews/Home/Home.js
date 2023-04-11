@@ -6,11 +6,13 @@ import classes from "./Home.module.css";
 import HomeProfile from "./HomeProfile.js";
 import PostBoard from "./PostBoard.js";
 import UserPost from "./UserPost.js";
+
 const Home = () => {
   const [modalUser, setModalUser] = useState({});
   const [modalLoading, setModalLoading] = useState(false);
   const [modalUserId, setModalUserId] = useState("");
   const [userModalVisible, setUserModalVisible] = useState(false);
+
 
   useEffect(() => {
     if (modalUserId.trim() !== "") {

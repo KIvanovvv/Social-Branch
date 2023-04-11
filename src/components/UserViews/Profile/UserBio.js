@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { changeDescriptionById } from "../../../services/authServices.js";
-import UserState from "../../../state-ctx/userState.js";
 import Button from "../../Utils/Button.js";
 import classes from "./UserBio.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../../store/index.js";
 
 const UserBio = () => {
-  const { userData: ctxUserData, setUserData: ctxSetUserData } =
-    useContext(UserState);
-  const [bio, setBio] = useState(ctxUserData.description);
+  const userData = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
+  const [bio, setBio] = useState(userData.description);
   const [bioSaved, setBioSaved] = useState(false);
 
   function onChangeHandler(e) {
@@ -16,11 +17,11 @@ const UserBio = () => {
 
   async function onSaveHandler() {
     const user = await changeDescriptionById(
-      ctxUserData._id,
+      userData._id,
       bio,
-      ctxUserData.accessToken
+      userData.accessToken
     );
-    ctxSetUserData({ ...ctxUserData, ...user });
+    dispatch(userActions.setUserData({ ...userData, ...user }));
     setBioSaved(true);
   }
 

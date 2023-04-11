@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { createComment, getComments } from "../../../services/postServices.js";
-import UserState from "../../../state-ctx/userState.js";
 import Button from "../../Utils/Button.js";
 import classes from "./Posts.module.css";
+import { useSelector } from "react-redux";
 
 export default function List(props) {
   const [commentsVisiable, setCommentsVisiable] = useState(false);
@@ -11,7 +11,7 @@ export default function List(props) {
   const [content, setContent] = useState("");
   const [comments, setComments] = useState([]);
   const [commentsUpdated, setCommentsUpdated] = useState(false);
-  const { userData: ctxUserData } = useContext(UserState);
+  const userData = useSelector((state) => state.user.userData);
 
   function onChangeHandler(e) {
     setContent(e.target.value);
@@ -21,7 +21,7 @@ export default function List(props) {
     if (!content) {
       return;
     }
-    await createComment(content, props.data._id, ctxUserData);
+    await createComment(content, props.data._id, userData);
     setCommentsUpdated(true);
     setContent("");
   }

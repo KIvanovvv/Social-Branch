@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import UserState from "../../state-ctx/userState.js";
+import { useSelector } from "react-redux";
 
 const AuthGuard = () => {
-  const { userData } = useContext(UserState);
+  const userData = useSelector((state) => state.user.userData);
 
   if (!userData.accessToken) {
     return <Navigate to={"/login"} replace />;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Utils/Button.js";
 import { register } from "../../services/authServices.js";
 import staticPic from "../../resources/profilePic.jpg";
@@ -6,9 +6,11 @@ import classes from "./RegisterForm.module.css";
 import Background from "../Utils/Background.js";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../resources/Spinner.js";
-import UserState from "../../state-ctx/userState.js";
+import { userActions } from "../../store/index.js";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(false);
   const [username, setUsername] = useState("");
@@ -23,7 +25,6 @@ const RegisterForm = () => {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { setUserData: ctxSetUserData } = useContext(UserState);
 
   const emailPattern = /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -75,7 +76,7 @@ const RegisterForm = () => {
       setIsLoading(true);
       const user = await register(email, username, password);
       user.displayImage = staticPic;
-      ctxSetUserData(user);
+      dispatch(userActions.setUserData(user));
       sessionStorage.setItem(
         "user",
         JSON.stringify({

@@ -1,16 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Spinner from "../../resources/Spinner.js";
 import { sendMessage } from "../../services/messageService.js";
-import UserState from "../../state-ctx/userState.js";
 import Button from "./Button.js";
 import classes from "./UserModal.module.css";
 import staticPic from "../../resources/profilePic.jpg";
+import { useSelector } from "react-redux";
 
 const UserModal = ({ modalLoading, user }) => {
   const [sendMessageVisible, setSendMessageVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
-  const { userData: ctxUserData } = useContext(UserState);
+  const userData = useSelector((state) => state.user.userData);
 
   function sendMessageHandler() {
     setSendMessageVisible((curr) => !curr);
@@ -27,10 +27,10 @@ const UserModal = ({ modalLoading, user }) => {
     await sendMessage(
       message,
       user._id,
-      ctxUserData._id,
-      ctxUserData.imageUrl || staticPic,
-      ctxUserData.username,
-      ctxUserData.accessToken
+      userData._id,
+      userData.imageUrl || staticPic,
+      userData.username,
+      userData.accessToken
     );
     setIsSending(false);
     setMessage("");

@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../../services/authServices.js";
 import Background from "../Utils/Background.js";
 import Button from "../Utils/Button.js";
 import classes from "./LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../resources/Spinner.js";
-import UserState from "../../state-ctx/userState.js";
-const LoginFrom = (props) => {
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/index.js";
+const LoginFrom = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setUserData: ctxSetUserData } = useContext(UserState);
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isEmailTouched, setIsEmailTouched] = useState(false);
@@ -63,8 +64,7 @@ const LoginFrom = (props) => {
       setIsLoading(true);
       const user = await login(email, password);
       user.displayImage = user.imageUrl;
-      console.log(user);
-      ctxSetUserData(user);
+      dispatch(userActions.setUserData(user));
       sessionStorage.setItem(
         "user",
         JSON.stringify({

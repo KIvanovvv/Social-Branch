@@ -1,17 +1,21 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createComment,
   deletePostById,
   getComments,
   updatePostById,
 } from "../../../services/postServices.js";
-import StateContext from "../../../state-ctx/state-ctx.js";
-import UserState from "../../../state-ctx/userState.js";
+// import StateContext from "../../../state-ctx/state-ctx.js";
+
 import Button from "../../Utils/Button.js";
 import classes from "./Posts.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../../store/index.js";
+import Spinner from "../../../resources/Spinner.js";
 
 export default function List(props) {
-  const ctx = useContext(StateContext);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
   const [commentsVisiable, setCommentsVisiable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [content, setContent] = useState("");
@@ -22,13 +26,12 @@ export default function List(props) {
   const [isPostUpdated, setIsPostUpdated] = useState(false);
   const [isDeleteActive, setIsDeleteActive] = useState(false);
   const [postDeleted, setPostDeleted] = useState(false);
-  const { userData: ctxUserData } = useContext(UserState);
 
   async function onConfirmDeleteHandler() {
-    await deletePostById(props.data._id, ctxUserData);
+    await deletePostById(props.data._id, userData);
     setIsDeleteActive(false);
     setPostDeleted(true);
-    ctx.setPostUpdated(true);
+    dispatch(userActions.updateUserPosts());
   }
 
   function onRejectDeleteHandler() {
@@ -55,9 +58,7 @@ export default function List(props) {
 
   useEffect(() => {
     async function updatePost() {
-      console.log(postContent);
-      console.log(props.data._id);
-      await updatePostById(props.data._id, postContent, ctxUserData);
+      await updatePostById(props.data._id, postContent, userData);
       setIsPostUpdated(false);
     }
     if (isPostUpdated) {
@@ -65,19 +66,15 @@ export default function List(props) {
     }
   }, [isPostUpdated]);
 
-  function updateData() {
-    console.log(postContent);
-  }
-
   function onChangeHandler(e) {
-    setContent((cur) => e.target.value);
+    setContent(e.target.value);
   }
 
   async function addComment() {
     if (!content) {
       return;
     }
-    await createComment(content, props.data._id);
+    await createComment(content, props.data._id, userData);
     setCommentsUpdated(true);
     setContent("");
   }
@@ -171,7 +168,7 @@ export default function List(props) {
       </li>
       {commentsVisiable && (
         <div className={classes.comment_section}>
-          {isLoading && <p>Loading...</p>}
+          {isLoading && <Spinner w={100} h={100} />}
           {!isLoading && (
             <>
               {" "}
@@ -186,7 +183,7 @@ export default function List(props) {
               </div>
               <ul className={classes.comments_ul}>
                 {comments.map((x) => (
-                  <li>
+                  <li key={x._id}>
                     <div
                       className={classes.img_comment}
                       style={{

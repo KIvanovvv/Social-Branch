@@ -1,24 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../../resources/Spinner.js";
 import { getMessagesByUserId } from "../../../services/messageService.js";
-import UserState from "../../../state-ctx/userState.js";
 import Button from "../../Utils/Button.js";
 import classes from "./MessageBoard.module.css";
 import MessageList from "./MessageList.js";
+import { useSelector } from "react-redux";
 
 const MessageBoard = ({ modalVisible, setModalUserId }) => {
+  const userData = useSelector((state) => state.user.userData);
   const [messages, setMessages] = useState([]);
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [reloadMsg, setReloadMsg] = useState(false);
-  const { userData: ctxUserData } = useContext(UserState);
 
   useEffect(() => {
     (async function getMessages() {
       setLoadingMessages(true);
-      setMessages(await getMessagesByUserId(ctxUserData._id));
+      setMessages(await getMessagesByUserId(userData._id));
       setLoadingMessages(false);
     })();
-  }, [reloadMsg, ctxUserData._id]);
+  }, [reloadMsg, userData._id]);
 
   function onReload() {
     setReloadMsg((curr) => !curr);
